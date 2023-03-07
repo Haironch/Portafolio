@@ -51,7 +51,7 @@ function Skillsgallery() {
   return (
     <SkillsgalleryWreapper>
       <Headercontent
-        title="SERCICIOS"
+        title="SERCICIOS DE HAIRON"
         subtitle="PORTAFOLIO"
         description="knihu. Jeho odkaz nevydržel pouze pět století, on přežil i nástup elektronické sazby v podstatě beze změny. Nejvíce popularizováno bylo Lorem Ipsum v šedesátých letech 20. století, kdy byly vydávány speciální vzorníky s jeho pasážemi a později pak díky počítačovým DTP programům jako Aldus PageMaker"
       />
