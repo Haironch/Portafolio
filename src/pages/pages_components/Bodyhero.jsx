@@ -1,106 +1,137 @@
 import React from "react";
 import styled from "styled-components";
-import { colors, fonts } from "../../assets/styles";
+import { colors, fonts, media } from "../../assets/styles";
 
 // assets
 import imgHero from "../../assets/imgs/man-hero.png";
 
 const HeroContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 80px;
-  width: 100%;
-  height: 900px;
-  box-sizing: border-box;
-
-  & > p {
-    color: blue;
-    margin-left: 16px;
-    font-size: 1em;
-    font-family: ${fonts.content};
+  ${media.ms} {
+    background-color: ${colors.bgDark};
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(3, auto);
+    grid-template-areas: "Contactame" "Foto" "Introduccion";
+    padding: 75px 0px 75px 0px;
+    height: auto;
+    width: 100%;
+    //justify-content: space-between;
+    //align-items: center;
+    //padding: 0 80px;
+    //width: 100%;
+    //height: 900px;
+    box-sizing: border-box;
+    & > p {
+      color: blue;
+      margin-left: 16px;
+      font-size: 1em;
+      font-family: ${fonts.content};
+    }
+  }
+  ${media.tl} {
+  }
+  ${media.txl} {
+    grid-template-columns: 20% 60% 20%;
+    grid-template-rows: auto;
+    grid-template-areas: "logo Menu social";
   }
 `;
 const Contacto = styled.div`
-  align-self: flex-start;
-  margin-top: 10%;
-  width: 20%;
-  h1 {
-    margin: 0;
-    color: ${colors.title};
-    font-size: 3em;
-    font-family: ${fonts.title};
-    font-weight: 900;
+  ${media.ms} {
+    grid-area: Contactame;
+    align-self: flex-start;
+    margin-bottom: 48px;
+    width: 100%;
+    text-align: center;
 
-    span {
-      color: orange;
-    }
-  }
-  .social {
-    margin: 28px 0;
-    color: ${colors.title};
-    font-family: ${fonts.content};
-
-    a {
-      margin-right: 8px;
+    h1 {
+      margin: 0;
       color: ${colors.title};
-      text-decoration: none;
-    }
+      font-size: 3em;
+      font-family: ${fonts.title};
+      font-weight: 900;
 
-    div a:nth-of-type(2) {
-      margin-left: 8px;
+      span {
+        color: orange;
+      }
     }
-  }
-  .btn-cta {
-    width: 150px;
-    height: 36px;
-    color: ${colors.primary};
-    border: 2px solid ${colors.primary};
-    background-color: transparent;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: 300ms background;
+    .social {
+      margin: 28px 0;
+      color: ${colors.title};
+      font-family: ${fonts.content};
+      font-size: 1.3em;
 
-    &:hover {
-      color: ${colors.bgDark};
-      background-color: ${colors.primary};
+      a {
+        margin-right: 8px;
+        color: ${colors.title};
+        text-decoration: none;
+      }
+
+      div a:nth-of-type(2) {
+        margin-left: 8px;
+      }
     }
+    .btn-cta {
+      width: 200px;
+      height: 44px;
+      color: ${colors.primary};
+      border: 2px solid ${colors.primary};
+      background-color: transparent;
+      text-transform: uppercase;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: 300ms background;
 
-    i {
-      margin-left: 8px;
+      &:hover {
+        color: ${colors.bgDark};
+        background-color: ${colors.primary};
+      }
+
+      i {
+        margin-left: 8px;
+      }
     }
   }
 `;
-const Img = styled.figure`
-  display: flex;
-  align-items: flex-end;
-  margin: 0;
-  width: 40%;
-  height: 100%;
 
-  img {
+const Img = styled.figure`
+  ${media.ms} {
+    grid-area: Foto;
+    display: flex;
+    align-items: flex-end;
+    align-items: center;
+    box-sizing: border-box;
+    margin: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
+    img {
+      width: 100%;
+      height: auto;
+    }
   }
 `;
 const Description = styled.div`
-  align-self: flex-start;
-  margin-top: 10%;
-  width: 20%;
-  font-family: ${fonts.title};
+  ${media.ms} {
+    grid-area: Introduccion;
+    text-align: center;
+    align-self: flex-start;
+    margin-top: 10%;
+    width: 100%;
+    font-family: ${fonts.title};
 
-  .title {
-    margin: 0;
-    margin: 8px 0;
-    color: ${colors.title};
-    font-size: 2em;
-  }
-  .subtitle {
-    color: ${colors.primary};
-    text-transform: uppercase;
-  }
-  .content {
-    color: ${colors.content};
+    .title {
+      margin: 28px 0;
+      color: ${colors.title};
+      font-size: 2em;
+    }
+    .subtitle {
+      color: ${colors.primary};
+      text-transform: uppercase;
+    }
+    .content {
+      color: ${colors.content};
+      font-size: 1.3em;
+    }
   }
 `;
 
@@ -129,7 +160,6 @@ function Bodyhero() {
           <i className="fa-solid fa-angle-right"></i>
         </button>
       </Contacto>
-
       <Img>
         <img src={imgHero} alt="" width="300" height="450" />
       </Img>

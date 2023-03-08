@@ -21,9 +21,9 @@ function Home() {
       <Navbar />
       <Bodyhero />
       <Skills />
-      <Skillsgallery />
+      {/*<Skillsgallery />
       <Articles />
-      <Footer />
+      <Footer />*/}
     </HomeContainer>
   );
 }

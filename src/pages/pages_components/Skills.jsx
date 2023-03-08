@@ -1,24 +1,25 @@
 import styled from "styled-components";
 
 import { skills } from "../../assets/data";
-import { colors, fonts } from "../../assets/styles";
+import { colors, fonts, media } from "../../assets/styles";
 import Headercontent from "../../components/Headercontent";
 
-const flex = {
-  display: "flex",
-  "justify-content": "center",
-  "align-items": "center",
-};
 const SkillsWrapper = styled.div`
-  padding: 100px 80px;
-  width: 100%;
-  height: auto;
-  background-color: ${colors.bgLight};
-  box-sizing: border-box;
+  ${media.ms} {
+    width: 100%;
+    height: auto;
+    background-color: ${colors.bgLight};
+    box-sizing: border-box;
+  }
 `;
 
 const CardsContainer = styled.div`
-  ${flex};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 1px solid red;
+  height: auto;
   justify-content: space-between;
   margin-top: 56px;
 `;
@@ -46,9 +47,14 @@ function Skills() {
 
 // sub components
 const CardWrapper = styled.div`
-  width: 300px;
-  height: 400px;
-  box-sizing: border-box;
+  ${media.ms} {
+    margin: 0 auto;
+    margin-bottom: 36px;
+    border: 1px solid white;
+    width: 300px;
+    height: 400px;
+    box-sizing: border-box;
+  }
 `;
 const CardHeader = styled.div`
   display: flex;
@@ -87,24 +93,26 @@ const CardHeader = styled.div`
   }
 `;
 const CardBody = styled.div`
-  ${flex};
-  height: calc(100% - 240px);
-  flex-direction: column;
-  font-family: ${fonts.content};
+  ${media.ms} {
+    text-align: center;
+    height: calc(100% - 240px);
+    flex-direction: column;
+    font-family: ${fonts.content};
 
-  .years-experience,
-  .card-body-content {
-    margin: 0;
-  }
-  .years-experience {
-    color: ${colors.primary};
-    font-size: 4em;
-    font-weight: 900;
-  }
-  .card-body-content {
-    color: ${colors.title};
-    font-size: 1em;
-    text-transform: uppercase;
+    .years-experience,
+    .card-body-content {
+      margin: 0;
+    }
+    .years-experience {
+      color: ${colors.primary};
+      font-size: 4em;
+      font-weight: 900;
+    }
+    .card-body-content {
+      color: ${colors.title};
+      font-size: 1em;
+      text-transform: uppercase;
+    }
   }
 `;
 function SkillCard({ skill }) {
