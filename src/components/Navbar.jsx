@@ -3,106 +3,110 @@ import { colors, fonts, media } from "../assets/styles";
 import logo from "../assets/imgs/logo-true.png";
 
 const NavbarContainer = styled.div`
+  position: fixed; // Mantiene el navbar fijo en la parte superior
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: ${colors.bgDark};
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
   ${media.ms} {
     display: grid;
-    grid-template-columns: repeat(2, 50%);
-    grid-template-rows: repeat(2, 100px);
-    grid-template-areas: "Logo Social" "Menu Menu";
-    justify-content: space-between;
-    padding: 0px 8px;
-    background-color: ${colors.bgDark};
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: "Logo Menu Social";
+    align-items: center;
+    padding: 1rem 2rem;
   }
+
   ${media.mm} {
-    grid-template-columns: 50% 50%;
-  }
-  ${media.ml} {
+    padding: 1rem 4rem;
   }
 `;
 
 const Logo = styled.figure`
   margin: 0;
-
+  grid-area: Logo;
+  
   ${media.ms} {
-    //border: 1px solid red;
-    width: 100%;
-    height: 70px;
-    grid-area: Logo;
-    //CENTRAR IMAGEN
     display: flex;
-    justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
+    
     .nav-logo {
-      //border: 1px solid red;
-      width: 100%;
-      height: auto;
-    }
-  }
-  ${media.mm} {
-  }
-  ${media.ml} {
-  }
-`;
-const Menu = styled.nav`
-  //box-sizing: border-box;
-  ${media.ms} {
-    //border: 1px solid red;
-    grid-area: Menu;
-    width: 100%;
-    height: 100%;
-    overflow-x: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    a {
-      margin: 0 15px;
-      color: ${colors.primary};
-      font-size: 24px;
-      font-family: ${fonts.title};
-      text-decoration: none;
-    }
-  }
-  ${media.mm} {
-    grid-area: Menu;
-    width: 200px;
-    height: 50px;
-  }
-  ${media.ml} {
-    grid-area: menu;
-    width: 200px;
-    height: 50px;
-  }
-`;
-const Social = styled.div`
-  ${media.ms} {
-    grid-area: Social;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    //border: 1px solid yellow;
-    width: 100%;
-    height: 100%;
+      max-height: 45px;
+      width: auto;
+      transition: transform 0.3s ease;
 
-    a {
-      color: ${colors.primary};
-      margin-left: 16px;
-      i {
-        font-size: 26px;
+      &:hover {
+        transform: scale(1.05);
       }
     }
   }
-  ${media.mm} {
-  }
-  ${media.ml} {
+`;
+
+const Menu = styled.nav`
+  grid-area: Menu;
+  
+  ${media.ms} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    
+    a {
+      color: ${colors.primary};
+      font-size: 1.1rem;
+      font-family: ${fonts.title};
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      
+      &:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: ${colors.primary};
+        transition: width 0.3s ease;
+      }
+      
+      &:hover {
+        color: ${colors.primary}ee;
+        &:after {
+          width: 100%;
+        }
+      }
+    }
   }
 `;
-// <></>
+
+const Social = styled.div`
+  grid-area: Social;
+  
+  ${media.ms} {
+    display: flex;
+    gap: 1.5rem;
+    
+    a {
+      color: ${colors.primary};
+      transition: all 0.3s ease;
+      
+      i {
+        font-size: 1.4rem;
+      }
+      
+      &:hover {
+        transform: translateY(-2px);
+        color: ${colors.primary}ee;
+      }
+    }
+  }
+`;
 
 function Navbar() {
-  const name = "Kevin";
-  const saludo = `hola mundo de parte de: ${name}`;
-
   return (
     <NavbarContainer>
       <Logo>
@@ -110,21 +114,21 @@ function Navbar() {
       </Logo>
 
       <Menu>
-        <a href="#footer">Home</a>
-        <a href="#">Portafolio</a>
-        <a href="#">Blog</a>
-        <a href="#">Pages</a>
-        <a href="#">Contacto</a>
+        <a href="#home">Home</a>
+        <a href="#portfolio">Portafolio</a>
+        <a href="#blog">Blog</a>
+        <a href="#pages">Pages</a>
+        <a href="#contact">Contacto</a>
       </Menu>
 
       <Social>
-        <a href="">
+        <a href="#" aria-label="Facebook">
           <i className="fa-brands fa-facebook"></i>
         </a>
-        <a href="">
+        <a href="#" aria-label="WhatsApp">
           <i className="fa-brands fa-whatsapp"></i>
         </a>
-        <a href="">
+        <a href="#" aria-label="GitHub">
           <i className="fa-brands fa-github"></i>
         </a>
       </Social>

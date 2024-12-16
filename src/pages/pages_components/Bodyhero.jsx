@@ -1,95 +1,143 @@
 import React from "react";
 import styled from "styled-components";
 import { colors, fonts, media } from "../../assets/styles";
-
-// assets
 import imgHero from "../../assets/imgs/man-hero.png";
 
 const HeroContainer = styled.div`
+  min-height: calc(100vh - 77px);
+  background-color: ${colors.bgDark};
+  margin-top: 77px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden; /* Prevenir scroll */
+
   ${media.ms} {
-    background-color: ${colors.bgDark};
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: repeat(3, auto);
-    grid-template-areas: "Contactame" "Foto" "Introduccion";
-    padding: 75px 0px 75px 0px;
-    height: auto;
-    width: 100%;
-    //justify-content: space-between;
-    //align-items: center;
-    //padding: 0 80px;
-    //width: 100%;
-    //height: 900px;
-    box-sizing: border-box;
-    & > p {
-      color: blue;
-      margin-left: 16px;
-      font-size: 1em;
-      font-family: ${fonts.content};
-    }
+    grid-template-areas: 
+      "Contactame"
+      "Foto";
+    padding: clamp(1rem, 5vw, 24px);
+    gap: clamp(1rem, 3vw, 2rem);
   }
-  ${media.tl} {
-  }
-  ${media.txl} {
-    grid-template-columns: 20% 60% 20%;
-    grid-template-rows: auto;
-    grid-template-areas: "logo Menu social";
+  
+  ${media.mm} {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "Contactame Foto";
+    padding: clamp(2rem, 5vw, 48px);
+    gap: clamp(1.5rem, 3vw, 3rem);
   }
 `;
+
 const Contacto = styled.div`
   ${media.ms} {
     grid-area: Contactame;
-    align-self: flex-start;
-    margin-bottom: 48px;
-    width: 100%;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 3vh, 2rem);
 
     h1 {
       margin: 0;
       color: ${colors.title};
-      font-size: 3em;
+      font-size: clamp(2.5em, 5vw, 3.5em);
       font-family: ${fonts.title};
       font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.2;
 
       span {
-        color: orange;
+        color: ${colors.primary};
+        position: relative;
+        &:after {
+          content: '';
+          position: absolute;
+          width: 8px;
+          height: 8px;
+          background: ${colors.primary};
+          border-radius: 50%;
+          bottom: 8px;
+          right: -12px;
+        }
       }
     }
+
     .social {
-      margin: 28px 0;
-      color: ${colors.title};
-      font-family: ${fonts.content};
-      font-size: 1.3em;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      align-items: center;
+
+      .social-row {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
 
       a {
-        margin-right: 8px;
         color: ${colors.title};
         text-decoration: none;
-      }
-
-      div a:nth-of-type(2) {
-        margin-left: 8px;
+        transition: all 0.3s ease;
+        font-family: ${fonts.content};
+        font-size: 1.1em;
+        padding: 0.5rem 1rem;
+        
+        &:hover {
+          color: ${colors.primary};
+          transform: translateY(-2px);
+        }
       }
     }
+
     .btn-cta {
-      width: 200px;
-      height: 44px;
+      padding: 12px 28px;
       color: ${colors.primary};
       border: 2px solid ${colors.primary};
       background-color: transparent;
       text-transform: uppercase;
       font-size: 1.1em;
       cursor: pointer;
-      transition: 300ms background;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      border-radius: 4px;
+      align-self: center;
+      white-space: nowrap;
 
       &:hover {
         color: ${colors.bgDark};
         background-color: ${colors.primary};
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
       }
 
       i {
         margin-left: 8px;
+        transition: transform 0.3s ease;
       }
+
+      &:hover i {
+        transform: translateX(4px);
+      }
+    }
+  }
+
+  ${media.mm} {
+    text-align: left;
+    align-self: center;
+
+    .social {
+      align-items: flex-start;
+      
+      .social-row {
+        justify-content: flex-start;
+      }
+    }
+
+    .btn-cta {
+      align-self: flex-start;
     }
   }
 `;
@@ -97,77 +145,72 @@ const Contacto = styled.div`
 const Img = styled.figure`
   ${media.ms} {
     grid-area: Foto;
-    display: flex;
-    align-items: flex-end;
-    align-items: center;
-    box-sizing: border-box;
     margin: 0;
-    width: 100%;
-    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, ${colors.primary}, transparent);
+    }
+
     img {
       width: 100%;
+      max-width: min(400px, 90vw);
       height: auto;
+      display: block;
+      transition: transform 0.3s ease;
+      
+      &:hover {
+        transform: translateY(-5px);
+      }
     }
   }
-`;
-const Description = styled.div`
-  ${media.ms} {
-    grid-area: Introduccion;
-    text-align: center;
-    align-self: flex-start;
-    margin-top: 10%;
-    width: 100%;
-    font-family: ${fonts.title};
 
-    .title {
-      margin: 28px 0;
-      color: ${colors.title};
-      font-size: 2em;
-    }
-    .subtitle {
-      color: ${colors.primary};
-      text-transform: uppercase;
-    }
-    .content {
-      color: ${colors.content};
-      font-size: 1.3em;
+  ${media.mm} {
+    align-self: center;
+    
+    img {
+      max-width: min(350px, 40vw);
     }
   }
 `;
 
 function Bodyhero() {
-  const skills = "UI/UX Designer, Full Stack Web Developer";
-  const description =
-    "Esta es una descripción de las habilidades que manejo y de las tecnologias que utilizo";
   return (
     <HeroContainer>
       <Contacto>
         <h1>
-          Hairon <br /> Chávez<span>.</span>{" "}
+          Hairon<br />
+          Chávez<span>.</span>
         </h1>
         <div className="social">
-          <div>
-            <a href="https://instagram.com">instagram</a> |
-            <a href="https://linkedin.com">linkedin</a>
+          <div className="social-row">
+            <a href="https://instagram.com">Instagram</a>
+            <a href="https://linkedin.com">LinkedIn</a>
           </div>
-          <div>
-            <a href="https://github.com">github</a> |
+          <div className="social-row">
+            <a href="https://github.com">GitHub</a>
             <a href="https://twitter.com">Twitter</a>
           </div>
         </div>
         <button className="btn-cta">
-          Contactame
+          Contáctame
           <i className="fa-solid fa-angle-right"></i>
         </button>
       </Contacto>
+
       <Img>
-        <img src={imgHero} alt="" width="300" height="450" />
+        <img src={imgHero} alt="Hairon Chávez" />
       </Img>
-      <Description>
-        <strong className="subtitle">Introducción</strong>
-        <h2 className="title">{skills}</h2>
-        <p className="content">{description}</p>
-      </Description>
     </HeroContainer>
   );
 }

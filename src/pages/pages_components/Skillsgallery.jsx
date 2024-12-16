@@ -1,65 +1,241 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { colors, fonts } from "../../assets/styles";
 import Headercontent from "../../components/Headercontent";
-import Navigation from "./Subcomponets/Navigation";
-import Gallery from "./Subcomponets/Gallery";
 
-const SkillsgalleryWreapper = styled.div`
-  padding: 100px 80px;
+const SkillsgalleryWrapper = styled.section`
   width: 100%;
-  height: auto;
+  min-height: 100vh;
   background-color: ${colors.bgDark};
+  padding: 6rem 4rem;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 `;
 
-function Skillsgallery() {
-  const [menu, setMenu] = useState("desarrolloweb");
+const GalleryContainer = styled.div`
+  max-width: 1400px;
+  margin: 3rem auto 0;
+  width: 100%;
+`;
 
-  function verifyMenu() {
-    switch (menu) {
-      case "desarrolloweb":
-        return (
-          <Gallery
-            img1="https://plus.unsplash.com/premium_photo-1671129471248-82d1ba9dab31?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1614&q=80"
-            img2="https://images.unsplash.com/photo-1678188053660-a0c36ecb9bdf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=988&q=80"
-            img3="https://images.unsplash.com/photo-1678156529666-5017b01a642a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1035&q=80"
-            img4="https://images.unsplash.com/photo-1678025275990-fc029162ec5d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80"
-          />
-        );
-      case "disenouxui":
-        return (
-          <Gallery
-            img1="https://images.unsplash.com/photo-1506097425191-7ad538b29cef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-            img2="https://images.unsplash.com/photo-1534670007418-fbb7f6cf32c3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=988&q=80"
-            img3="https://images.unsplash.com/photo-1498075702571-ecb018f3752d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1478&q=80"
-            img4="https://images.unsplash.com/photo-1573164713619-24c711fe7878?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1738&q=80"
-          />
-        );
-      case "aplicacionesdeescritorio":
-        return (
-          <Gallery
-            img1="https://images.unsplash.com/photo-1529336953128-a85760f58cb5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-            img2="https://images.unsplash.com/photo-1619597455322-4fbbd820250a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-            img3="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-            img4="https://images.unsplash.com/photo-1499914485622-a88fac536970?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-          />
-        );
-    }
+const TabsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+`;
+
+const TabButton = styled.button`
+  background: transparent;
+  border: none;
+  color: ${props => props.active ? colors.primary : colors.title};
+  font-family: ${fonts.title};
+  font-size: 1.1rem;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: ${props => props.active ? '100%' : '0'};
+    height: 2px;
+    background: ${colors.primary};
+    transition: width 0.3s ease;
   }
 
+  &:hover {
+    color: ${colors.primary};
+    
+    &::after {
+      width: 100%;
+    }
+  }
+`;
+
+const GalleryGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(2, 300px);
+  gap: 1.5rem;
+  opacity: ${props => props.visible ? 1 : 0};
+  transform: translateY(${props => props.visible ? '0' : '20px'});
+  transition: all 0.5s ease;
+`;
+
+const GalleryItem = styled.div`
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  grid-column: ${props => props.span};
+  grid-row: ${props => props.rowSpan};
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, 0.7) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 2;
+  }
+
+  .title {
+    color: white;
+    font-family: ${fonts.title};
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .description {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  &:hover {
+    &::before {
+      opacity: 1;
+    }
+
+    img {
+      transform: scale(1.1);
+    }
+
+    .overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+`;
+
+const galleryData = {
+  desarrolloweb: [
+    {
+      id: 1,
+      title: "E-commerce Platform",
+      description: "Desarrollo full-stack con React y Node.js",
+      image: "https://plus.unsplash.com/premium_photo-1671129471248-82d1ba9dab31",
+      span: "1 / 7",
+      rowSpan: "1 / 3"
+    },
+    {
+      id: 2,
+      title: "Dashboard Analytics",
+      description: "Interface de administración con gráficos en tiempo real",
+      image: "https://images.unsplash.com/photo-1678188053660-a0c36ecb9bdf",
+      span: "7 / 13",
+      rowSpan: "1 / 2"
+    },
+    {
+      id: 3,
+      title: "Portfolio Website",
+      description: "Diseño responsivo con animaciones avanzadas",
+      image: "https://images.unsplash.com/photo-1678156529666-5017b01a642a",
+      span: "7 / 10",
+      rowSpan: "2 / 3"
+    },
+    {
+      id: 4,
+      title: "Blog Platform",
+      description: "CMS personalizado con editor rich text",
+      image: "https://images.unsplash.com/photo-1678025275990-fc029162ec5d",
+      span: "10 / 13",
+      rowSpan: "2 / 3"
+    }
+  ],
+  disenouxui: [
+    // Similar structure for UX/UI projects
+  ],
+  aplicacionesdeescritorio: [
+    // Similar structure for desktop applications
+  ]
+};
+
+function Skillsgallery() {
+  const [activeTab, setActiveTab] = useState("desarrolloweb");
+  const [isVisible, setIsVisible] = useState(true);
+
+  const handleTabChange = (tab) => {
+    if (tab === activeTab) return;
+    setIsVisible(false);
+    setTimeout(() => {
+      setActiveTab(tab);
+      setIsVisible(true);
+    }, 500);
+  };
+
+  const tabs = [
+    { id: "desarrolloweb", label: "Desarrollo Web" },
+    { id: "disenouxui", label: "Diseño UX/UI" },
+    { id: "aplicacionesdeescritorio", label: "Apps de Escritorio" }
+  ];
+
   return (
-    <SkillsgalleryWreapper>
+    <SkillsgalleryWrapper>
       <Headercontent
-        title="SERCICIOS DE HAIRON"
+        title="PROYECTOS"
         subtitle="PORTAFOLIO"
-        description="knihu. Jeho odkaz nevydržel pouze pět století, on přežil i nástup elektronické sazby v podstatě beze změny. Nejvíce popularizováno bylo Lorem Ipsum v šedesátých letech 20. století, kdy byly vydávány speciální vzorníky s jeho pasážemi a později pak díky počítačovým DTP programům jako Aldus PageMaker"
+        description="Explora mi colección de proyectos en desarrollo web, diseño UX/UI y aplicaciones de escritorio. Cada proyecto refleja mi compromiso con la calidad y la innovación."
       />
-      <div>
-        <Navigation setMenu={setMenu} />
-        {verifyMenu()}
-      </div>
-    </SkillsgalleryWreapper>
+      <GalleryContainer>
+        <TabsContainer>
+          {tabs.map(tab => (
+            <TabButton
+              key={tab.id}
+              active={activeTab === tab.id}
+              onClick={() => handleTabChange(tab.id)}
+            >
+              {tab.label}
+            </TabButton>
+          ))}
+        </TabsContainer>
+        <GalleryGrid visible={isVisible}>
+          {galleryData[activeTab]?.map(item => (
+            <GalleryItem
+              key={item.id}
+              span={item.span}
+              rowSpan={item.rowSpan}
+            >
+              <img src={item.image} alt={item.title} />
+              <div className="overlay">
+                <h3 className="title">{item.title}</h3>
+                <p className="description">{item.description}</p>
+              </div>
+            </GalleryItem>
+          ))}
+        </GalleryGrid>
+      </GalleryContainer>
+    </SkillsgalleryWrapper>
   );
 }
 
