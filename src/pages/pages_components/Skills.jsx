@@ -2,6 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { colors, fonts, media } from "../../assets/styles";
 import Headercontent from "../../components/Headercontent";
+import { 
+  Layers, 
+  Server, 
+  Database
+} from 'lucide-react';
 
 const SkillsWrapper = styled.section`
   width: 100%;
@@ -10,14 +15,14 @@ const SkillsWrapper = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 2rem; // Padding inicial más pequeño
+  padding-top: 2rem;
   padding-bottom: 4rem;
   box-sizing: border-box;
-  scroll-margin-top: 77px; // Altura del navbar
+  scroll-margin-top: 77px;
 
   @media (max-width: 768px) {
     padding: 3rem 1rem;
-    min-height: auto; // En móvil permitimos que sea más flexible
+    min-height: auto;
   }
 
   ${media.ms} {
@@ -48,8 +53,8 @@ const CardWrapper = styled.div`
   border-radius: 12px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: auto; // Cambiado de height fijo a auto
-  min-height: 420px; // Agregado min-height para mantener un tamaño mínimo
+  height: auto;
+  min-height: 420px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -82,16 +87,32 @@ const CardHeader = styled.div`
   position: relative;
   z-index: 1;
 
-  figure {
+  .icon-container {
     width: 80px;
     height: 80px;
     margin: 0 auto 1.5rem;
-    transition: transform 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: ${colors.primary}15;
+    border-radius: 50%;
+    transition: all 0.3s ease;
 
-    img {
-      width: 100%;
-      height: auto;
-      filter: invert(100%);
+    svg {
+      width: 40px;
+      height: 40px;
+      color: ${colors.primary};
+      stroke-width: 1.5px;
+      transition: all 0.3s ease;
+    }
+  }
+
+  &:hover .icon-container {
+    transform: scale(1.1);
+    background: ${colors.primary}25;
+
+    svg {
+      transform: scale(1.1);
     }
   }
 
@@ -127,10 +148,11 @@ const CardHeader = styled.div`
     padding: 0.3rem 0.8rem;
     border-radius: 20px;
     font-size: 0.85em;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
 
     &:hover {
       background: ${colors.primary}33;
+      transform: translateY(-2px);
     }
   }
 `;
@@ -138,7 +160,7 @@ const CardHeader = styled.div`
 const CardBody = styled.div`
   padding: 2rem;
   text-align: center;
-  flex: 1; // Permite que el cuerpo ocupe el espacio restante
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -173,47 +195,48 @@ const CardBody = styled.div`
   }
 `;
 
-// ... resto del código igual (skillsData y SkillCard component)
 const skillsData = [
   {
     type: "Frontend",
     title: "Desarrollo Web",
-    icon: "/path/to/web-icon.svg",
+    Icon: Layers,
     years: 4,
     projects: 15,
     tags: ["React", "Vue.js", "HTML5", "CSS3", "JavaScript"],
     description:
-      "Especializado en crear interfaces modernas y responsivas con enfoque en la experiencia de usuario y rendimiento.",
+      "Especializado en crear interfaces modernas y responsivas con enfoque en la experiencia de usuario y rendimiento."
   },
   {
     type: "Backend",
     title: "Desarrollo Backend",
-    icon: "/path/to/backend-icon.svg",
+    Icon: Server,
     years: 4,
     projects: 12,
     tags: ["Node.js", "Java", "Express", "Spring Boot"],
     description:
-      "Experiencia en desarrollo de APIs RESTful, microservicios y arquitecturas escalables.",
+      "Experiencia en desarrollo de APIs RESTful, microservicios y arquitecturas escalables."
   },
   {
     type: "Bases de Datos",
     title: "Gestión de Datos",
-    icon: "/path/to/database-icon.svg",
+    Icon: Database,
     years: 4,
     projects: 10,
     tags: ["MySQL", "MongoDB", "PostgreSQL", "Redis"],
     description:
-      "Diseño e implementación de bases de datos relacionales y NoSQL con enfoque en optimización y seguridad.",
-  },
+      "Diseño e implementación de bases de datos relacionales y NoSQL con enfoque en optimización y seguridad."
+  }
 ];
 
 function SkillCard({ skill }) {
+  const Icon = skill.Icon;
+  
   return (
     <CardWrapper>
       <CardHeader>
-        <figure>
-          <img src={skill.icon} alt={skill.title} />
-        </figure>
+        <div className="icon-container">
+          <Icon />
+        </div>
         <p className="skill-type">{skill.type}</p>
         <h3 className="card-title">{skill.title}</h3>
         <div className="skill-tags">

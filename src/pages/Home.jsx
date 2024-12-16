@@ -20,15 +20,15 @@ const HomeContainer = styled.div`
   &::-webkit-scrollbar {
     width: 8px;
   }
-  
+
   &::-webkit-scrollbar-track {
     background: ${colors.bgDark};
   }
-  
+
   &::-webkit-scrollbar-thumb {
     background: ${colors.primary};
     border-radius: 4px;
-    
+
     &:hover {
       background: ${colors.primary}dd;
     }
@@ -53,22 +53,23 @@ function Home() {
         <section id="bodyhero">
           <Bodyhero />
         </section>
-        
+
         <section id="skills">
           <Skills />
         </section>
-        
+
         <section id="skillsgallery">
           <Skillsgallery />
         </section>
-        
+
         <section id="articles">
           <Articles />
         </section>
       </MainContent>
-      <footer id="footer">
+
+      <sectior id="footer">
         <Footer />
-      </footer>
+      </sectior>
     </HomeContainer>
   );
 }
