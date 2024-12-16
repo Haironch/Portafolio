@@ -10,29 +10,18 @@ const NavbarContainer = styled.div`
   right: 0;
   z-index: 1000;
   background-color: ${colors.bgDark};
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 1rem;
 
   @media (max-width: 768px) {
-    padding: 0.5rem 1rem;
-  }
-
-  ${media.ms} {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    grid-template-areas: "Logo Menu Social";
-    align-items: center;
-    padding: 1rem 2rem;
-  }
-
-  ${media.mm} {
-    padding: 1rem 4rem;
+    padding: 0.8rem 1.5rem;
   }
 `;
 
 const Logo = styled.figure`
   margin: 0;
-  grid-area: Logo;
   display: flex;
   align-items: center;
   
@@ -41,10 +30,6 @@ const Logo = styled.figure`
     width: auto;
     transition: transform 0.3s ease;
 
-    @media (min-width: 768px) {
-      max-height: 45px;
-    }
-
     &:hover {
       transform: scale(1.05);
     }
@@ -52,54 +37,69 @@ const Logo = styled.figure`
 `;
 
 const MenuButton = styled.button`
-  display: none;
   background: none;
   border: none;
   color: ${colors.primary};
   font-size: 1.5rem;
   cursor: pointer;
   padding: 0.5rem;
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
+  display: none;
+  z-index: 1100;
 
   @media (max-width: 768px) {
     display: block;
   }
 `;
 
-const Menu = styled.nav`
-  grid-area: Menu;
+const MobileMenuOverlay = styled.div`
+  display: none;
   
   @media (max-width: 768px) {
-    display: ${props => props.isOpen ? 'flex' : 'none'};
-    position: absolute;
-    top: 100%;
+    display: ${props => props.isOpen ? 'block' : 'none'};
+    position: fixed;
+    top: 0;
     left: 0;
     right: 0;
+    bottom: 0;
     background-color: ${colors.bgDark};
+    z-index: 1050;
+    opacity: 0.98;
+  }
+`;
+
+const Menu = styled.nav`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+
+  @media (max-width: 768px) {
+    display: ${props => props.isOpen ? 'flex' : 'none'};
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
     flex-direction: column;
-    padding: 1rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    align-items: flex-start;
+    padding: 1rem 2rem;
+    gap: 1rem;
+    z-index: 1060;
 
     a {
-      padding: 0.8rem 0;
-      text-align: center;
-      border-bottom: 1px solid ${colors.primary}33;
+      color: ${colors.primary};
+      font-size: 1.1rem;
+      text-decoration: none;
+      padding: 0.5rem 0;
+      width: 100%;
+      border-bottom: 1px solid ${colors.primary}20;
 
       &:last-child {
         border-bottom: none;
       }
     }
   }
-  
-  ${media.ms} {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    
+
+  @media (min-width: 769px) {
     a {
       color: ${colors.primary};
       font-size: 1.1rem;
@@ -131,32 +131,31 @@ const Menu = styled.nav`
 `;
 
 const Social = styled.div`
-  grid-area: Social;
+  display: flex;
+  gap: 1.5rem;
   
   @media (max-width: 768px) {
     display: ${props => props.isOpen ? 'flex' : 'none'};
+    position: fixed;
+    bottom: 2rem;
+    left: 0;
+    right: 0;
     justify-content: center;
-    padding: 1rem 0;
-    background-color: ${colors.bgDark};
-    border-top: 1px solid ${colors.primary}33;
+    gap: 2rem;
+    z-index: 1060;
   }
   
-  ${media.ms} {
-    display: flex;
-    gap: 1.5rem;
+  a {
+    color: ${colors.primary};
+    transition: all 0.3s ease;
     
-    a {
-      color: ${colors.primary};
-      transition: all 0.3s ease;
-      
-      i {
-        font-size: 1.4rem;
-      }
-      
-      &:hover {
-        transform: translateY(-2px);
-        color: ${colors.primary}ee;
-      }
+    i {
+      font-size: 1.4rem;
+    }
+    
+    &:hover {
+      transform: translateY(-2px);
+      color: ${colors.primary}ee;
     }
   }
 `;
@@ -164,10 +163,9 @@ const Social = styled.div`
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Función para manejar el scroll suave
   const handleNavClick = (e, targetId) => {
     e.preventDefault();
-    setIsMenuOpen(false); // Cierra el menú móvil al hacer clic
+    setIsMenuOpen(false);
 
     const target = document.querySelector(targetId);
     const navbarHeight = document.querySelector('nav').offsetHeight;
@@ -183,21 +181,17 @@ function Navbar() {
     }
   };
 
-  // Cierra el menú cuando se hace scroll
   useEffect(() => {
-    const handleScroll = () => {
-      if (isMenuOpen) {
-        setIsMenuOpen(false);
-      }
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
     };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, [isMenuOpen]);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
 
   return (
     <NavbarContainer>
@@ -205,10 +199,12 @@ function Navbar() {
         <img className="nav-logo" src={logo} alt="logo" />
       </Logo>
 
-      <MenuButton onClick={toggleMenu}>
+      <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
         <i className={`fa-solid ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
       </MenuButton>
 
+      <MobileMenuOverlay isOpen={isMenuOpen} onClick={() => setIsMenuOpen(false)} />
+      
       <Menu isOpen={isMenuOpen}>
         <a href="#bodyhero" onClick={(e) => handleNavClick(e, '#bodyhero')}>Home</a>
         <a href="#skills" onClick={(e) => handleNavClick(e, '#skills')}>Skills</a>
