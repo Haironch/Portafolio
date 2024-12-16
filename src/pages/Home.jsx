@@ -1,3 +1,4 @@
+// Home.jsx
 import React from "react";
 import styled from "styled-components";
 import { colors } from "../assets/styles";
@@ -37,6 +38,11 @@ const HomeContainer = styled.div`
 const MainContent = styled.main`
   position: relative;
   width: 100%;
+  /* Aseguramos que las secciones tengan suficiente padding para compensar el navbar fijo */
+  section {
+    scroll-margin-top: 77px; /* Altura del navbar */
+    padding: 2rem 0;
+  }
 `;
 
 function Home() {
@@ -44,12 +50,25 @@ function Home() {
     <HomeContainer>
       <Navbar />
       <MainContent>
-        <Bodyhero />
-        <Skills />
-        <Skillsgallery />
-        <Articles />
+        <section id="bodyhero">
+          <Bodyhero />
+        </section>
+        
+        <section id="skills">
+          <Skills />
+        </section>
+        
+        <section id="skillsgallery">
+          <Skillsgallery />
+        </section>
+        
+        <section id="articles">
+          <Articles />
+        </section>
       </MainContent>
-      <Footer />
+      <footer id="footer">
+        <Footer />
+      </footer>
     </HomeContainer>
   );
 }

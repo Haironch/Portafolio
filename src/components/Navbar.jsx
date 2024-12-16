@@ -1,15 +1,21 @@
+import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import { colors, fonts, media } from "../assets/styles";
 import logo from "../assets/imgs/logo-true.png";
 
 const NavbarContainer = styled.div`
-  position: fixed; // Mantiene el navbar fijo en la parte superior
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
   background-color: ${colors.bgDark};
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+
+  @media (max-width: 768px) {
+    padding: 0.5rem 1rem;
+  }
 
   ${media.ms} {
     display: grid;
@@ -27,25 +33,66 @@ const NavbarContainer = styled.div`
 const Logo = styled.figure`
   margin: 0;
   grid-area: Logo;
+  display: flex;
+  align-items: center;
   
-  ${media.ms} {
-    display: flex;
-    align-items: center;
-    
-    .nav-logo {
-      max-height: 45px;
-      width: auto;
-      transition: transform 0.3s ease;
+  .nav-logo {
+    max-height: 35px;
+    width: auto;
+    transition: transform 0.3s ease;
 
-      &:hover {
-        transform: scale(1.05);
-      }
+    @media (min-width: 768px) {
+      max-height: 45px;
     }
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+`;
+
+const MenuButton = styled.button`
+  display: none;
+  background: none;
+  border: none;
+  color: ${colors.primary};
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+
+  @media (max-width: 768px) {
+    display: block;
   }
 `;
 
 const Menu = styled.nav`
   grid-area: Menu;
+  
+  @media (max-width: 768px) {
+    display: ${props => props.isOpen ? 'flex' : 'none'};
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: ${colors.bgDark};
+    flex-direction: column;
+    padding: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    a {
+      padding: 0.8rem 0;
+      text-align: center;
+      border-bottom: 1px solid ${colors.primary}33;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
   
   ${media.ms} {
     display: flex;
@@ -86,6 +133,14 @@ const Menu = styled.nav`
 const Social = styled.div`
   grid-area: Social;
   
+  @media (max-width: 768px) {
+    display: ${props => props.isOpen ? 'flex' : 'none'};
+    justify-content: center;
+    padding: 1rem 0;
+    background-color: ${colors.bgDark};
+    border-top: 1px solid ${colors.primary}33;
+  }
+  
   ${media.ms} {
     display: flex;
     gap: 1.5rem;
@@ -107,21 +162,62 @@ const Social = styled.div`
 `;
 
 function Navbar() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Función para manejar el scroll suave
+  const handleNavClick = (e, targetId) => {
+    e.preventDefault();
+    setIsMenuOpen(false); // Cierra el menú móvil al hacer clic
+
+    const target = document.querySelector(targetId);
+    const navbarHeight = document.querySelector('nav').offsetHeight;
+
+    if (target) {
+      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = targetPosition - navbarHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  // Cierra el menú cuando se hace scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isMenuOpen) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isMenuOpen]);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <NavbarContainer>
       <Logo>
         <img className="nav-logo" src={logo} alt="logo" />
       </Logo>
 
-      <Menu>
-        <a href="#home">Home</a>
-        <a href="#portfolio">Portafolio</a>
-        <a href="#blog">Blog</a>
-        <a href="#pages">Pages</a>
-        <a href="#contact">Contacto</a>
+      <MenuButton onClick={toggleMenu}>
+        <i className={`fa-solid ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+      </MenuButton>
+
+      <Menu isOpen={isMenuOpen}>
+        <a href="#bodyhero" onClick={(e) => handleNavClick(e, '#bodyhero')}>Home</a>
+        <a href="#skills" onClick={(e) => handleNavClick(e, '#skills')}>Skills</a>
+        <a href="#skillsgallery" onClick={(e) => handleNavClick(e, '#skillsgallery')}>Portfolio</a>
+        <a href="#articles" onClick={(e) => handleNavClick(e, '#articles')}>Blog</a>
+        <a href="#footer" onClick={(e) => handleNavClick(e, '#footer')}>Contacto</a>
       </Menu>
 
-      <Social>
+      <Social isOpen={isMenuOpen}>
         <a href="#" aria-label="Facebook">
           <i className="fa-brands fa-facebook"></i>
         </a>

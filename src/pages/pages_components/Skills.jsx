@@ -1,19 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { colors, fonts, media } from "../../assets/styles";
 import Headercontent from "../../components/Headercontent";
 
-const SkillsWrapper = styled.div`
+const SkillsWrapper = styled.section`
+  width: 100%;
+  min-height: 100vh;
+  background-color: ${colors.bgLight};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 2rem; // Padding inicial más pequeño
+  padding-bottom: 4rem;
+  box-sizing: border-box;
+  scroll-margin-top: 77px; // Altura del navbar
+
+  @media (max-width: 768px) {
+    padding: 3rem 1rem;
+    min-height: auto; // En móvil permitimos que sea más flexible
+  }
+
   ${media.ms} {
-    width: 100%;
-    min-height: 100vh;
-    background-color: ${colors.bgLight};
     padding: 4rem 2rem;
-    box-sizing: border-box;
   }
 
   ${media.mm} {
-    padding: 6rem 4rem;
+    padding: 5rem 4rem;
   }
 `;
 
@@ -22,8 +34,13 @@ const CardsContainer = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   max-width: 1400px;
-  margin: 3rem auto;
+  margin: 3rem auto 0;
   padding: 0 1rem;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    margin-top: 2rem;
+  }
 `;
 
 const CardWrapper = styled.div`
@@ -31,8 +48,11 @@ const CardWrapper = styled.div`
   border-radius: 12px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: 420px;
+  height: auto; // Cambiado de height fijo a auto
+  min-height: 420px; // Agregado min-height para mantener un tamaño mínimo
   position: relative;
+  display: flex;
+  flex-direction: column;
 
   &:hover {
     transform: translateY(-10px);
@@ -40,7 +60,7 @@ const CardWrapper = styled.div`
   }
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -118,12 +138,16 @@ const CardHeader = styled.div`
 const CardBody = styled.div`
   padding: 2rem;
   text-align: center;
+  flex: 1; // Permite que el cuerpo ocupe el espacio restante
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   .experience-info {
     display: flex;
     justify-content: space-around;
     margin-bottom: 1.5rem;
-    
+
     .stat {
       .number {
         color: ${colors.primary};
@@ -132,7 +156,7 @@ const CardBody = styled.div`
         margin: 0;
         line-height: 1;
       }
-      
+
       .label {
         color: ${colors.title};
         font-size: 0.9em;
@@ -149,6 +173,7 @@ const CardBody = styled.div`
   }
 `;
 
+// ... resto del código igual (skillsData y SkillCard component)
 const skillsData = [
   {
     type: "Frontend",
@@ -157,7 +182,8 @@ const skillsData = [
     years: 4,
     projects: 15,
     tags: ["React", "Vue.js", "HTML5", "CSS3", "JavaScript"],
-    description: "Especializado en crear interfaces modernas y responsivas con enfoque en la experiencia de usuario y rendimiento."
+    description:
+      "Especializado en crear interfaces modernas y responsivas con enfoque en la experiencia de usuario y rendimiento.",
   },
   {
     type: "Backend",
@@ -166,7 +192,8 @@ const skillsData = [
     years: 4,
     projects: 12,
     tags: ["Node.js", "Java", "Express", "Spring Boot"],
-    description: "Experiencia en desarrollo de APIs RESTful, microservicios y arquitecturas escalables."
+    description:
+      "Experiencia en desarrollo de APIs RESTful, microservicios y arquitecturas escalables.",
   },
   {
     type: "Bases de Datos",
@@ -175,8 +202,9 @@ const skillsData = [
     years: 4,
     projects: 10,
     tags: ["MySQL", "MongoDB", "PostgreSQL", "Redis"],
-    description: "Diseño e implementación de bases de datos relacionales y NoSQL con enfoque en optimización y seguridad."
-  }
+    description:
+      "Diseño e implementación de bases de datos relacionales y NoSQL con enfoque en optimización y seguridad.",
+  },
 ];
 
 function SkillCard({ skill }) {
@@ -216,10 +244,11 @@ function SkillCard({ skill }) {
 function Skills() {
   const title = "Experiencia Profesional";
   const subtitle = "Mis Habilidades";
-  const description = "Desarrollador Full Stack con 4 años de experiencia y pensum académico cerrado. Especializado en tecnologías web modernas, desarrollo backend robusto y gestión eficiente de bases de datos.";
+  const description =
+    "Desarrollador Full Stack con 4 años de experiencia y pensum académico cerrado. Especializado en tecnologías web modernas, desarrollo backend robusto y gestión eficiente de bases de datos.";
 
   return (
-    <SkillsWrapper>
+    <SkillsWrapper id="skills">
       <Headercontent
         title={title}
         subtitle={subtitle}
