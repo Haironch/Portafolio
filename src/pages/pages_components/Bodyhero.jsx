@@ -1,218 +1,100 @@
 import React from "react";
-import styled from "styled-components";
-import { colors, fonts, media } from "../../assets/styles";
-import imgHero from "../../assets/imgs/man-hero.png";
+import { Code2, Laptop, Palette, ArrowRight } from "lucide-react";
+import imgHero from "../../assets/imgs/logo.png";
 
-const HeroContainer = styled.div`
-  min-height: calc(100vh - 77px);
-  background-color: ${colors.bgDark};
-  margin-top: 77px;
-  display: flex;
-  align-items: center;
-  position: relative;
-  overflow: hidden; /* Prevenir scroll */
-
-  ${media.ms} {
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-areas: 
-      "Contactame"
-      "Foto";
-    padding: clamp(1rem, 5vw, 24px);
-    gap: clamp(1rem, 3vw, 2rem);
-  }
-  
-  ${media.mm} {
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: "Contactame Foto";
-    padding: clamp(2rem, 5vw, 48px);
-    gap: clamp(1.5rem, 3vw, 3rem);
-  }
-`;
-
-const Contacto = styled.div`
-  ${media.ms} {
-    grid-area: Contactame;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(1rem, 3vh, 2rem);
-
-    h1 {
-      margin: 0;
-      color: ${colors.title};
-      font-size: clamp(2.5em, 5vw, 3.5em);
-      font-family: ${fonts.title};
-      font-weight: 900;
-      letter-spacing: -1px;
-      line-height: 1.2;
-
-      span {
-        color: ${colors.primary};
-        position: relative;
-        &:after {
-          content: '';
-          position: absolute;
-          width: 8px;
-          height: 8px;
-          background: ${colors.primary};
-          border-radius: 50%;
-          bottom: 8px;
-          right: -12px;
-        }
-      }
-    }
-
-    .social {
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-      align-items: center;
-
-      .social-row {
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      a {
-        color: ${colors.title};
-        text-decoration: none;
-        transition: all 0.3s ease;
-        font-family: ${fonts.content};
-        font-size: 1.1em;
-        padding: 0.5rem 1rem;
-        
-        &:hover {
-          color: ${colors.primary};
-          transform: translateY(-2px);
-        }
-      }
-    }
-
-    .btn-cta {
-      padding: 12px 28px;
-      color: ${colors.primary};
-      border: 2px solid ${colors.primary};
-      background-color: transparent;
-      text-transform: uppercase;
-      font-size: 1.1em;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-weight: 600;
-      border-radius: 4px;
-      align-self: center;
-      white-space: nowrap;
-
-      &:hover {
-        color: ${colors.bgDark};
-        background-color: ${colors.primary};
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      }
-
-      i {
-        margin-left: 8px;
-        transition: transform 0.3s ease;
-      }
-
-      &:hover i {
-        transform: translateX(4px);
-      }
-    }
-  }
-
-  ${media.mm} {
-    text-align: left;
-    align-self: center;
-
-    .social {
-      align-items: flex-start;
-      
-      .social-row {
-        justify-content: flex-start;
-      }
-    }
-
-    .btn-cta {
-      align-self: flex-start;
-    }
-  }
-`;
-
-const Img = styled.figure`
-  ${media.ms} {
-    grid-area: Foto;
-    margin: 0;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    &:after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
-      height: 4px;
-      background: linear-gradient(90deg, transparent, ${colors.primary}, transparent);
-    }
-
-    img {
-      width: 100%;
-      max-width: min(400px, 90vw);
-      height: auto;
-      display: block;
-      transition: transform 0.3s ease;
-      
-      &:hover {
-        transform: translateY(-5px);
-      }
-    }
-  }
-
-  ${media.mm} {
-    align-self: center;
-    
-    img {
-      max-width: min(350px, 40vw);
-    }
-  }
-`;
-
-function Bodyhero() {
+const Bodyhero = () => {
   return (
-    <HeroContainer>
-      <Contacto>
-        <h1>
-          Hairon<br />
-          Chávez<span>.</span>
-        </h1>
-        <div className="social">
-          <div className="social-row">
-            <a href="https://instagram.com">Instagram</a>
-            <a href="https://linkedin.com">LinkedIn</a>
+    <div className="w-full min-h-screen bg-bgLight flex items-center">
+      <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-4 md:px-12">
+        {/* Columna izquierda */}
+        <div className="flex flex-col items-center md:items-start justify-center space-y-8 animate-fadeIn">
+          {/* Nombre */}
+          <div className="text-center md:text-left">
+            <h1 className="text-6xl md:text-7xl font-bold text-title tracking-tight leading-none">
+              Hairon
+              <br />
+              <span className="inline-flex items-end">
+                Chávez  
+                <span className="ml-0.5 inline-block w-2 h-2 bg-primary animate-pulse"></span>
+              </span>
+            </h1>
           </div>
-          <div className="social-row">
-            <a href="https://github.com">GitHub</a>
-            <a href="https://twitter.com">Twitter</a>
-          </div>
-        </div>
-        <button className="btn-cta">
-          Contáctame
-          <i className="fa-solid fa-angle-right"></i>
-        </button>
-      </Contacto>
 
-      <Img>
-        <img src={imgHero} alt="Hairon Chávez" />
-      </Img>
-    </HeroContainer>
+          {/* Rest of the component stays the same */}
+          <div className="flex flex-col items-center md:items-start space-y-6 w-full">
+            <span className="text-xl md:text-2xl text-primary font-semibold text-center md:text-left">
+              Desarrollador Full Stack y CEO de Tav Solutions Technology
+            </span>
+
+            <div className="flex flex-wrap justify-center md:justify-start gap-4">
+              <div className="flex items-center gap-2 px-6 py-2 rounded-full bg-primary/10 text-title hover:bg-primary/15 transition-all duration-300 hover:-translate-y-1 group">
+                <Code2
+                  className="text-primary group-hover:scale-110 transition-transform"
+                  size={20}
+                />
+                <span>Full Stack</span>
+              </div>
+              <div className="flex items-center gap-2 px-6 py-2 rounded-full bg-primary/10 text-title hover:bg-primary/15 transition-all duration-300 hover:-translate-y-1 group">
+                <Palette
+                  className="text-primary group-hover:scale-110 transition-transform"
+                  size={20}
+                />
+                <span>UX/UI</span>
+              </div>
+              <div className="flex items-center gap-2 px-6 py-2 rounded-full bg-primary/10 text-title hover:bg-primary/15 transition-all duration-300 hover:-translate-y-1 group">
+                <Laptop
+                  className="text-primary group-hover:scale-110 transition-transform"
+                  size={20}
+                />
+                <span>Design</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Enlaces Sociales */}
+          <div className="flex flex-col md:flex-row items-center gap-6">
+            <div className="flex gap-6">
+              {["GitHub", "LinkedIn", "Twitter", "Instagram"].map((link) => (
+                <a
+                  key={link}
+                  href={`https://${link.toLowerCase()}.com`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-title text-lg hover:text-primary transition-colors relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all"
+                >
+                  {link}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Botón CTA */}
+          <button className="group relative inline-flex items-center gap-2 px-8 py-4 text-primary border-2 border-primary rounded-lg font-semibold overflow-hidden transition-all duration-300 hover:-translate-y-1">
+            <span className="relative z-10 transition-colors duration-300 group-hover:text-title">
+              Contáctame
+            </span>
+            <ArrowRight
+              size={20}
+              className="relative z-10 transition-all duration-300 group-hover:text-title group-hover:translate-x-1"
+            />
+            <div className="absolute inset-0 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+          </button>
+        </div>
+
+        {/* Columna derecha - Imagen */}
+        <div className="flex justify-center items-center">
+          <figure className="relative m-0">
+            <img
+              src={imgHero}
+              alt="Hairon Chávez"
+              className="max-w-[90vw] md:max-w-[400px] h-auto rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2"
+            />
+            <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-4/5 h-1 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+          </figure>
+        </div>
+      </div>
+    </div>
   );
-}
+};
 
 export default Bodyhero;
