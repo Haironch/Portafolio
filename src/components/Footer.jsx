@@ -1,70 +1,6 @@
 import React from "react";
-import styled from "styled-components";
-import { colors, fonts, media } from "../assets/styles";
 import Headercontent from "./Headercontent";
 import Contactlink from "./footersubcomponets/Contactlink";
-
-const FooterWrapper = styled.footer`
-  width: 100%;
-  background-color: ${colors.bgDark};
-  padding: 4rem 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-  box-sizing: border-box;
-
-  ${media.ms} {
-    padding: 3rem 1rem;
-  }
-`;
-
-const ContactLinks = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
-
-  ${media.ms} {
-    gap: 1rem;
-    padding: 1rem;
-  }
-`;
-
-const SubFooter = styled.div`
-  position: relative;
-  padding-top: 2rem;
-  margin-top: auto;
-  text-align: center;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    max-width: 1200px;
-    height: 4px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      ${colors.primary},
-      transparent
-    );
-  }
-
-  p {
-    color: ${colors.title};
-    font-family: ${fonts.content};
-    font-size: 0.9rem;
-    margin: 0;
-    opacity: 0.8;
-  }
-`;
 
 const socialLinks = [
   { texto: "Twitter", url: "https://twitter.com/?lang=es", icon: "twitter" },
@@ -76,13 +12,15 @@ const socialLinks = [
 
 function Footer() {
   return (
-    <FooterWrapper>
+    <footer className="w-full bg-bgDark py-12 px-8 md:px-8 flex flex-col gap-8 box-border">
       <Headercontent
-        title="Contacto"
+        title="Redes Sociales"
         subtitle="Conectemos"
-        description="¿Tienes un proyecto en mente? Me encantaría colaborar contigo. Encuentra mis redes sociales a continuación o envíame un mensaje directo."
+        description="¿Buscas un desarrollador apasionado para tu próximo proyecto? Estoy aquí para ayudarte a convertir tus ideas en realidad. Contacta conmigo a través de cualquiera de mis redes sociales."
       />
-      <ContactLinks>
+      
+      {/* Enlaces de contacto */}
+      <div className="flex justify-center items-center flex-wrap gap-6 max-w-3xl mx-auto px-6 py-4 md:px-4">
         {socialLinks.map((link, index) => (
           <Contactlink
             key={index}
@@ -91,11 +29,16 @@ function Footer() {
             icon={link.icon}
           />
         ))}
-      </ContactLinks>
-      <SubFooter>
-        <p>© {new Date().getFullYear()} Hairon Chávez. Todos los derechos reservados.</p>
-      </SubFooter>
-    </FooterWrapper>
+      </div>
+
+      {/* Sub Footer con línea decorativa */}
+      <div className="relative pt-6 mt-auto text-center">
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-4/5 max-w-6xl h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+        <p className="text-title font-content text-sm opacity-80">
+          © {new Date().getFullYear()} Hairon Chávez. Todos los derechos reservados.
+        </p>
+      </div>
+    </footer>
   );
 }
 

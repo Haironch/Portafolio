@@ -7,7 +7,7 @@ const SkillsgalleryWrapper = styled.section`
   width: 100%;
   min-height: 100vh;
   background-color: ${colors.bgDark};
-  padding: 6rem 4rem;
+  padding: 3rem 4rem; /* Reducido de 6rem a 3rem */
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -15,7 +15,7 @@ const SkillsgalleryWrapper = styled.section`
 
 const GalleryContainer = styled.div`
   max-width: 1400px;
-  margin: 3rem auto 0;
+  margin: 2rem auto 0; /* Reducido de 3rem a 2rem */
   width: 100%;
 `;
 
@@ -23,7 +23,7 @@ const TabsContainer = styled.div`
   display: flex;
   justify-content: center;
   gap: 1rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem; /* Reducido de 3rem a 2rem */
 `;
 
 const TabButton = styled.button`
