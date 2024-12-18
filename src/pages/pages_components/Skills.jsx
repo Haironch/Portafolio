@@ -102,7 +102,7 @@ function Skills() {
   const title = "Experiencia Profesional";
   const subtitle = "Mis Habilidades";
   const description =
-    "Desarrollador Full Stack con 4 años de experiencia y pensum académico cerrado. Especializado en tecnologías web modernas, desarrollo backend robusto y gestión eficiente de bases de datos.";
+    "Desarrollador Full Stack con 4 años de experiencia y pensum académico cerrado. Especializado en tecnologías web modernas, desarrollo backend robusto y gestión eficiente de bases de datos. Con experiencia en la creación de soluciones a nivel nacional trabajando para empresas como la Superintendencia de Administración Tributaria, específicamente en el departamento de Aduanas.";
 
   return (
     <section

@@ -12,7 +12,7 @@ export default {
       colors: {
         primary: "#907c66",
         title: "#c5c6ca",
-        content: "#535459",
+        content: "#8b8c91",
         bgDark: "#2c2d32",
         bgLight: "#323338",
       },
