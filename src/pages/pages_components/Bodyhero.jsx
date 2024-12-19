@@ -55,17 +55,38 @@ const Bodyhero = () => {
           {/* Enlaces Sociales */}
           <div className="flex flex-col md:flex-row items-center gap-3 md:gap-6">
             <div className="flex gap-3 md:gap-6 flex-wrap justify-center">
-              {["GitHub", "LinkedIn", "Twitter", "Instagram"].map((link) => (
-                <a
-                  key={link}
-                  href={`https://${link.toLowerCase()}.com`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-title text-sm sm:text-base md:text-lg hover:text-primary transition-colors relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all"
-                >
-                  {link}
-                </a>
-              ))}
+              <a
+                href="https://github.com/Haironch"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-title text-sm sm:text-base md:text-lg hover:text-primary transition-colors relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all"
+              >
+                GitHub
+              </a>
+              <a
+                href="https://www.linkedin.com/in/hairon-chavez-78a551337"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-title text-sm sm:text-base md:text-lg hover:text-primary transition-colors relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all"
+              >
+                LinkedIn
+              </a>
+              <a
+                href="https://x.com/hc23504778"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-title text-sm sm:text-base md:text-lg hover:text-primary transition-colors relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all"
+              >
+                Twitter
+              </a>
+              <a
+                href="https://www.instagram.com/iron_ch.29"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-title text-sm sm:text-base md:text-lg hover:text-primary transition-colors relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all"
+              >
+                Instagram
+              </a>
             </div>
           </div>
 

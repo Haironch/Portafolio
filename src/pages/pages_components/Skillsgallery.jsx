@@ -2,7 +2,9 @@ import { useState } from "react";
 import styled from "styled-components";
 import { colors, fonts } from "../../assets/styles";
 import Headercontent from "../../components/Headercontent";
-
+import imgRegistrarVenta from "../../assets/imgs/registrarVenta.png";
+import imgFinalizarVenta from "../../assets/imgs/finalizarVenta.png";
+import imgDesarrolloWeb from "../../assets/imgs/pageone.png";
 const SkillsgalleryWrapper = styled.section`
   width: 100%;
   min-height: 100vh;
@@ -142,32 +144,32 @@ const galleryData = {
   desarrolloweb: [
     {
       id: 1,
-      title: "E-commerce Platform",
-      description: "Desarrollo full-stack con React y Node.js",
-      image: "https://plus.unsplash.com/premium_photo-1671129471248-82d1ba9dab31",
+      title: "Proyecto a nivel nacional",
+      description: "Desarrollo full-stack con Java y PrimeFaces",
+      image: imgFinalizarVenta,
       span: "1 / 7",
       rowSpan: "1 / 3"
     },
     {
       id: 2,
-      title: "Dashboard Analytics",
+      title: "sitio web corporativo",
       description: "Interface de administración con gráficos en tiempo real",
-      image: "https://images.unsplash.com/photo-1678188053660-a0c36ecb9bdf",
+      image: imgDesarrolloWeb,
       span: "7 / 13",
       rowSpan: "1 / 2"
     },
     {
       id: 3,
-      title: "Portfolio Website",
-      description: "Diseño responsivo con animaciones avanzadas",
-      image: "https://images.unsplash.com/photo-1678156529666-5017b01a642a",
+      title: "Desarrollo a nivel de adunas",
+      description: "Diseño responsivo para aduanas del país",
+      image: imgRegistrarVenta,
       span: "7 / 10",
       rowSpan: "2 / 3"
     },
     {
       id: 4,
-      title: "Blog Platform",
-      description: "CMS personalizado con editor rich text",
+      title: "Desarrollo visual",
+      description: "Desarrollo de interfaz visual para empresas",
       image: "https://images.unsplash.com/photo-1678025275990-fc029162ec5d",
       span: "10 / 13",
       rowSpan: "2 / 3"

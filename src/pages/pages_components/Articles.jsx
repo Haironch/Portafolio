@@ -4,7 +4,7 @@ import { colors, fonts } from "../../assets/styles";
 import Headercontent from "../../components/Headercontent";
 
 const ConteinerArticles = styled.div`
-  padding: 3rem 4rem; /* Reducido de 6rem a 3rem */
+  padding: 2rem 4rem;
   width: 100%;
   box-sizing: border-box;
   background: ${colors.bgLight};
@@ -12,7 +12,7 @@ const ConteinerArticles = styled.div`
 
 const ProjectsGrid = styled.div`
   max-width: 1400px;
-  margin: 2rem auto; /* Reducido de 3rem a 2rem */
+  margin: 2rem auto;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(3, 200px);
@@ -29,7 +29,6 @@ const FeatureCard = styled.article`
   overflow: hidden;
   position: relative;
   cursor: pointer;
-  background: ${colors.bgDark}; /* Añadido para tener un fondo mientras no hay imagen */
   
   &::before {
     content: '';
@@ -111,35 +110,35 @@ function Articles() {
       id: 1,
       title: "Desarrollo Web Frontend",
       description: "Diseño y desarrollo de interfaces modernas y responsivas con React y Vue.js",
-      image: "", // Espacio para la imagen
+      image: "https://cdn.pixabay.com/photo/2021/08/04/13/06/software-developer-6521720_1280.jpg",
       area: "feat1"
     },
     {
       id: 2,
       title: "Aplicaciones Backend",
       description: "Desarrollo de APIs y servicios escalables con Node.js y Java",
-      image: "", // Espacio para la imagen
+      image: "https://cdn.pixabay.com/photo/2016/11/30/20/58/programming-1873854_1280.png",
       area: "feat2"
     },
     {
       id: 3,
       title: "Bases de Datos",
       description: "Gestión y optimización de bases de datos SQL y NoSQL",
-      image: "", // Espacio para la imagen
+      image: "https://cdn.pixabay.com/photo/2021/10/11/17/36/technology-6701404_1280.jpg",
       area: "side1"
     },
     {
       id: 4,
       title: "Cloud Services",
       description: "Despliegue y mantenimiento en AWS y Google Cloud",
-      image: "", // Espacio para la imagen
+      image: "https://cdn.pixabay.com/photo/2017/06/14/16/20/network-2402637_1280.jpg",
       area: "side2"
     },
     {
       id: 5,
       title: "DevOps",
       description: "Implementación de CI/CD y contenedores Docker",
-      image: "", // Espacio para la imagen
+      image: "https://cdn.pixabay.com/photo/2019/06/17/19/48/source-4280758_1280.jpg",
       area: "side3"
     }
   ];
@@ -160,7 +159,7 @@ function Articles() {
               featured={true}
             >
               <div className="image-container">
-                {project.image && <img src={project.image} alt={project.title} />}
+                <img src={project.image} alt={project.title} />
               </div>
               <div className="content">
                 <h3 className="title">{project.title}</h3>
@@ -173,7 +172,7 @@ function Articles() {
               area={project.area}
             >
               <div className="image-container">
-                {project.image && <img src={project.image} alt={project.title} />}
+                <img src={project.image} alt={project.title} />
               </div>
               <div className="content">
                 <h3 className="title">{project.title}</h3>
