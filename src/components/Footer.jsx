@@ -3,11 +3,31 @@ import Headercontent from "./Headercontent";
 import Contactlink from "./footersubcomponets/Contactlink";
 
 const socialLinks = [
-  { texto: "Twitter", url: "https://twitter.com/?lang=es", icon: "twitter" },
-  { texto: "LinkedIn", url: "https://gt.linkedin.com/", icon: "linkedin" },
-  { texto: "GitHub", url: "https://github.com/", icon: "github" },
-  { texto: "WhatsApp", url: "https://www.whatsapp.com/?lang=es", icon: "whatsapp" },
-  { texto: "Telegram", url: "https://web.telegram.org/k/", icon: "telegram" }
+  { 
+    texto: "GitHub", 
+    url: "https://github.com/Haironch", 
+    icon: "github" 
+  },
+  { 
+    texto: "LinkedIn", 
+    url: "https://www.linkedin.com/in/hairon-chavez-78a551337", 
+    icon: "linkedin" 
+  },
+  { 
+    texto: "Twitter", 
+    url: "https://x.com/hc23504778", 
+    icon: "twitter" 
+  },
+  { 
+    texto: "Telegram", 
+    url: "https://t.me/Hairch29", 
+    icon: "telegram" 
+  },
+  { 
+    texto: "WhatsApp", 
+    url: "https://wa.me/50244899009", 
+    icon: "whatsapp" 
+  }
 ];
 
 function Footer() {
