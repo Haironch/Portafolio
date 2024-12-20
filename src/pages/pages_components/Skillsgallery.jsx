@@ -5,27 +5,43 @@ import Headercontent from "../../components/Headercontent";
 import imgRegistrarVenta from "../../assets/imgs/registrarVenta.png";
 import imgFinalizarVenta from "../../assets/imgs/finalizarVenta.png";
 import imgDesarrolloWeb from "../../assets/imgs/pageone.png";
+
 const SkillsgalleryWrapper = styled.section`
   width: 100%;
   min-height: 100vh;
   background-color: ${colors.bgDark};
-  padding: 3rem 4rem; /* Reducido de 6rem a 3rem */
+  padding: 3rem 4rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 768px) {
+    padding: 2rem 1.5rem;
+  }
 `;
 
 const GalleryContainer = styled.div`
   max-width: 1400px;
-  margin: 2rem auto 0; /* Reducido de 3rem a 2rem */
+  margin: 2rem auto 0;
   width: 100%;
+
+  @media (max-width: 768px) {
+    margin: 1rem auto 0;
+  }
 `;
 
 const TabsContainer = styled.div`
   display: flex;
   justify-content: center;
   gap: 1rem;
-  margin-bottom: 2rem; /* Reducido de 3rem a 2rem */
+  margin-bottom: 2rem;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const TabButton = styled.button`
@@ -38,6 +54,14 @@ const TabButton = styled.button`
   cursor: pointer;
   position: relative;
   transition: all 0.3s ease;
+  white-space: nowrap;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    max-width: 280px;
+  }
 
   &::after {
     content: '';
@@ -52,7 +76,6 @@ const TabButton = styled.button`
 
   &:hover {
     color: ${colors.primary};
-    
     &::after {
       width: 100%;
     }
@@ -67,6 +90,12 @@ const GalleryGrid = styled.div`
   opacity: ${props => props.visible ? 1 : 0};
   transform: translateY(${props => props.visible ? '0' : '20px'});
   transition: all 0.5s ease;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 1rem;
+  }
 `;
 
 const GalleryItem = styled.div`
@@ -76,6 +105,12 @@ const GalleryItem = styled.div`
   cursor: pointer;
   grid-column: ${props => props.span};
   grid-row: ${props => props.rowSpan};
+
+  @media (max-width: 768px) {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    height: 250px;
+  }
 
   &::before {
     content: '';
@@ -109,6 +144,17 @@ const GalleryItem = styled.div`
     transform: translateY(10px);
     transition: all 0.3s ease;
     z-index: 2;
+
+    @media (max-width: 768px) {
+      padding: 1rem;
+      opacity: 1;
+      transform: none;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0, 0, 0, 0.8) 100%
+      );
+    }
   }
 
   .title {
@@ -116,12 +162,21 @@ const GalleryItem = styled.div`
     font-family: ${fonts.title};
     font-size: 1.5rem;
     margin: 0 0 0.5rem;
+
+    @media (max-width: 768px) {
+      font-size: 1.2rem;
+      margin: 0 0 0.25rem;
+    }
   }
 
   .description {
     color: rgba(255, 255, 255, 0.9);
     font-size: 0.9rem;
     margin: 0;
+
+    @media (max-width: 768px) {
+      font-size: 0.8rem;
+    }
   }
 
   &:hover {
@@ -136,6 +191,14 @@ const GalleryItem = styled.div`
     .overlay {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    &:hover {
+      img {
+        transform: none;
+      }
     }
   }
 `;
@@ -176,10 +239,40 @@ const galleryData = {
     }
   ],
   disenouxui: [
-    // Similar structure for UX/UI projects
+    {
+      id: 1,
+      title: "Diseño UX/UI para App Móvil",
+      description: "Interfaz intuitiva para aplicación de delivery",
+      image: imgFinalizarVenta,
+      span: "1 / 7",
+      rowSpan: "1 / 3"
+    },
+    {
+      id: 2,
+      title: "Rediseño de Plataforma Web",
+      description: "Mejora de experiencia de usuario para e-commerce",
+      image: imgDesarrolloWeb,
+      span: "7 / 13",
+      rowSpan: "1 / 2"
+    }
   ],
   aplicacionesdeescritorio: [
-    // Similar structure for desktop applications
+    {
+      id: 1,
+      title: "Sistema de Gestión",
+      description: "Software de gestión empresarial multiplataforma",
+      image: imgRegistrarVenta,
+      span: "1 / 7",
+      rowSpan: "1 / 3"
+    },
+    {
+      id: 2,
+      title: "App de Control de Inventario",
+      description: "Aplicación de escritorio para control de stock",
+      image: imgDesarrolloWeb,
+      span: "7 / 13",
+      rowSpan: "1 / 2"
+    }
   ]
 };
 

@@ -8,6 +8,10 @@ const ConteinerArticles = styled.div`
   width: 100%;
   box-sizing: border-box;
   background: ${colors.bgLight};
+
+  @media (max-width: 768px) {
+    padding: 2rem 1.5rem;
+  }
 `;
 
 const ProjectsGrid = styled.div`
@@ -21,6 +25,28 @@ const ProjectsGrid = styled.div`
     "feat1 feat1 feat1 feat2 feat2 feat2 side2"
     "feat1 feat1 feat1 feat2 feat2 feat2 side3";
   gap: 1.5rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: 
+      "feat1 feat1"
+      "feat2 feat2"
+      "side1 side2"
+      "side3 side3";
+    gap: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+      "feat1"
+      "feat2"
+      "side1"
+      "side2"
+      "side3";
+    margin: 1rem auto;
+  }
 `;
 
 const FeatureCard = styled.article`
@@ -29,6 +55,15 @@ const FeatureCard = styled.article`
   overflow: hidden;
   position: relative;
   cursor: pointer;
+  min-height: ${props => props.featured ? '400px' : '200px'};
+  
+  @media (max-width: 1024px) {
+    min-height: 300px;
+  }
+
+  @media (max-width: 768px) {
+    min-height: 250px;
+  }
   
   &::before {
     content: '';
@@ -40,6 +75,7 @@ const FeatureCard = styled.article`
       rgba(0, 0, 0, 0.7) 100%
     );
     z-index: 1;
+    opacity: 0.8;
   }
 
   .image-container {
@@ -60,8 +96,12 @@ const FeatureCard = styled.article`
     right: 0;
     padding: 2rem;
     z-index: 2;
-    transform: translateY(20px);
+    transform: translateY(0);
     transition: transform 0.3s ease;
+
+    @media (max-width: 768px) {
+      padding: 1.25rem;
+    }
   }
 
   .title {
@@ -69,6 +109,11 @@ const FeatureCard = styled.article`
     font-family: ${fonts.title};
     font-size: ${props => props.featured ? '2rem' : '1.5rem'};
     margin: 0 0 0.5rem 0;
+
+    @media (max-width: 768px) {
+      font-size: ${props => props.featured ? '1.5rem' : '1.25rem'};
+      margin: 0 0 0.25rem 0;
+    }
   }
 
   .description {
@@ -76,21 +121,39 @@ const FeatureCard = styled.article`
     font-family: ${fonts.content};
     font-size: 1rem;
     margin: 0;
-    opacity: 0;
-    transform: translateY(20px);
+    opacity: 1;
+    transform: translateY(0);
     transition: all 0.3s ease;
+
+    @media (max-width: 768px) {
+      font-size: 0.875rem;
+      opacity: 1;
+      transform: none;
+    }
   }
 
-  &:hover {
-    .image-container img {
-      transform: scale(1.1);
-    }
-    .content {
-      transform: translateY(0);
-    }
+  @media (min-width: 769px) {
     .description {
-      opacity: 1;
-      transform: translateY(0);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    &:hover {
+      .image-container img {
+        transform: scale(1.1);
+      }
+      .description {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    &:active {
+      .image-container img {
+        transform: scale(1.05);
+      }
     }
   }
 `;
@@ -98,9 +161,26 @@ const FeatureCard = styled.article`
 const SideCard = styled(FeatureCard)`
   .title {
     font-size: 1.2rem;
+
+    @media (max-width: 768px) {
+      font-size: 1.1rem;
+    }
   }
+  
   .content {
     padding: 1.5rem;
+
+    @media (max-width: 768px) {
+      padding: 1.25rem;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    min-height: 250px;
+  }
+
+  @media (max-width: 768px) {
+    min-height: 200px;
   }
 `;
 
@@ -159,7 +239,7 @@ function Articles() {
               featured={true}
             >
               <div className="image-container">
-                <img src={project.image} alt={project.title} />
+                <img src={project.image} alt={project.title} loading="lazy" />
               </div>
               <div className="content">
                 <h3 className="title">{project.title}</h3>
@@ -172,7 +252,7 @@ function Articles() {
               area={project.area}
             >
               <div className="image-container">
-                <img src={project.image} alt={project.title} />
+                <img src={project.image} alt={project.title} loading="lazy" />
               </div>
               <div className="content">
                 <h3 className="title">{project.title}</h3>
