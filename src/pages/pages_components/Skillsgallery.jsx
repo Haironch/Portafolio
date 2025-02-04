@@ -5,6 +5,7 @@ import Headercontent from "../../components/Headercontent";
 import imgRegistrarVenta from "../../assets/imgs/registrarVenta.png";
 import imgFinalizarVenta from "../../assets/imgs/finalizarVenta.png";
 import imgDesarrolloWeb from "../../assets/imgs/pageone.png";
+import imgAppgym from "../../assets/imgs/appgym.png";
 
 const SkillsgalleryWrapper = styled.section`
   width: 100%;
@@ -35,7 +36,7 @@ const TabsContainer = styled.div`
   justify-content: center;
   gap: 1rem;
   margin-bottom: 2rem;
-  
+
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: center;
@@ -47,7 +48,7 @@ const TabsContainer = styled.div`
 const TabButton = styled.button`
   background: transparent;
   border: none;
-  color: ${props => props.active ? colors.primary : colors.title};
+  color: ${(props) => (props.active ? colors.primary : colors.title)};
   font-family: ${fonts.title};
   font-size: 1.1rem;
   padding: 0.5rem 1.5rem;
@@ -64,11 +65,11 @@ const TabButton = styled.button`
   }
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -4px;
     left: 0;
-    width: ${props => props.active ? '100%' : '0'};
+    width: ${(props) => (props.active ? "100%" : "0")};
     height: 2px;
     background: ${colors.primary};
     transition: width 0.3s ease;
@@ -87,8 +88,8 @@ const GalleryGrid = styled.div`
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(2, 300px);
   gap: 1.5rem;
-  opacity: ${props => props.visible ? 1 : 0};
-  transform: translateY(${props => props.visible ? '0' : '20px'});
+  opacity: ${(props) => (props.visible ? 1 : 0)};
+  transform: translateY(${(props) => (props.visible ? "0" : "20px")});
   transition: all 0.5s ease;
 
   @media (max-width: 768px) {
@@ -102,9 +103,9 @@ const GalleryItem = styled.div`
   position: relative;
   border-radius: 12px;
   overflow: hidden;
-  cursor: pointer;
-  grid-column: ${props => props.span};
-  grid-row: ${props => props.rowSpan};
+  cursor: ${(props) => (props.link ? "pointer" : "default")};
+  grid-column: ${(props) => props.span};
+  grid-row: ${(props) => props.rowSpan};
 
   @media (max-width: 768px) {
     grid-column: 1 / -1;
@@ -113,7 +114,7 @@ const GalleryItem = styled.div`
   }
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
     background: linear-gradient(
@@ -211,7 +212,7 @@ const galleryData = {
       description: "Desarrollo full-stack con Java y PrimeFaces",
       image: imgFinalizarVenta,
       span: "1 / 7",
-      rowSpan: "1 / 3"
+      rowSpan: "1 / 3",
     },
     {
       id: 2,
@@ -219,7 +220,7 @@ const galleryData = {
       description: "Interface de administración con gráficos en tiempo real",
       image: imgDesarrolloWeb,
       span: "7 / 13",
-      rowSpan: "1 / 2"
+      rowSpan: "1 / 2",
     },
     {
       id: 3,
@@ -227,7 +228,7 @@ const galleryData = {
       description: "Diseño responsivo para aduanas del país",
       image: imgRegistrarVenta,
       span: "7 / 10",
-      rowSpan: "2 / 3"
+      rowSpan: "2 / 3",
     },
     {
       id: 4,
@@ -235,8 +236,8 @@ const galleryData = {
       description: "Desarrollo de interfaz visual para empresas",
       image: "https://images.unsplash.com/photo-1678025275990-fc029162ec5d",
       span: "10 / 13",
-      rowSpan: "2 / 3"
-    }
+      rowSpan: "2 / 3",
+    },
   ],
   disenouxui: [
     {
@@ -245,7 +246,7 @@ const galleryData = {
       description: "Interfaz intuitiva para aplicación de delivery",
       image: imgFinalizarVenta,
       span: "1 / 7",
-      rowSpan: "1 / 3"
+      rowSpan: "1 / 3",
     },
     {
       id: 2,
@@ -253,8 +254,18 @@ const galleryData = {
       description: "Mejora de experiencia de usuario para e-commerce",
       image: imgDesarrolloWeb,
       span: "7 / 13",
-      rowSpan: "1 / 2"
-    }
+      rowSpan: "1 / 2",
+    },
+    {
+      id: 3,
+      title: "Sitio Web Fitness",
+      description:
+        "Un sitio web que realicé con el fin de poder crear una comunidad fitnes",
+      image: imgAppgym, // Puedes cambiar esta imagen por una específica
+      span: "7 / 13",
+      rowSpan: "2 / 3",
+      link: "https://mygymstats.netlify.app",
+    },
   ],
   aplicacionesdeescritorio: [
     {
@@ -263,7 +274,7 @@ const galleryData = {
       description: "Software de gestión empresarial multiplataforma",
       image: imgRegistrarVenta,
       span: "1 / 7",
-      rowSpan: "1 / 3"
+      rowSpan: "1 / 3",
     },
     {
       id: 2,
@@ -271,9 +282,9 @@ const galleryData = {
       description: "Aplicación de escritorio para control de stock",
       image: imgDesarrolloWeb,
       span: "7 / 13",
-      rowSpan: "1 / 2"
-    }
-  ]
+      rowSpan: "1 / 2",
+    },
+  ],
 };
 
 function Skillsgallery() {
@@ -289,10 +300,16 @@ function Skillsgallery() {
     }, 500);
   };
 
+  const handleItemClick = (link) => {
+    if (link) {
+      window.open(link, "_blank");
+    }
+  };
+
   const tabs = [
     { id: "desarrolloweb", label: "Desarrollo Web" },
     { id: "disenouxui", label: "Diseño UX/UI" },
-    { id: "aplicacionesdeescritorio", label: "Apps de Escritorio" }
+    { id: "aplicacionesdeescritorio", label: "Apps de Escritorio" },
   ];
 
   return (
@@ -304,7 +321,7 @@ function Skillsgallery() {
       />
       <GalleryContainer>
         <TabsContainer>
-          {tabs.map(tab => (
+          {tabs.map((tab) => (
             <TabButton
               key={tab.id}
               active={activeTab === tab.id}
@@ -315,11 +332,13 @@ function Skillsgallery() {
           ))}
         </TabsContainer>
         <GalleryGrid visible={isVisible}>
-          {galleryData[activeTab]?.map(item => (
+          {galleryData[activeTab]?.map((item) => (
             <GalleryItem
               key={item.id}
               span={item.span}
               rowSpan={item.rowSpan}
+              link={item.link}
+              onClick={() => handleItemClick(item.link)}
             >
               <img src={item.image} alt={item.title} />
               <div className="overlay">

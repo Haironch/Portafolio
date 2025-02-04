@@ -9,12 +9,13 @@ const Bodyhero = () => {
       <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 px-2 sm:px-4 md:px-12">
         {/* Columna izquierda */}
         <div className="flex flex-col items-center md:items-start justify-center space-y-4 md:space-y-8 pt-8 sm:pt-0">
-          {/* Nombre */}
           <div className="text-center md:text-left w-full">
             <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold text-title tracking-tight leading-tight">
-              Hairon
+              <span className="inline-block animate-slideRight opacity-0">
+                Hairon
+              </span>
               <br className="hidden xs:block" />
-              <span className="inline-flex items-end">
+              <span className="inline-flex items-end animate-slideRightDelay opacity-0">
                 Chávez
                 <span className="ml-0.5 inline-block w-2 h-2 bg-primary animate-pulse"></span>
               </span>
@@ -96,14 +97,19 @@ const Bodyhero = () => {
 
         {/* Columna derecha - Imagen */}
         <div className="flex justify-center items-center mt-6 md:mt-0">
-          <figure className="relative m-0 w-full max-w-[180px] sm:max-w-[220px] md:max-w-[300px]">
-            <img
-              src={imgHero}
-              alt="Hairon Chávez"
-              className="w-full h-auto rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 object-cover"
-            />
-            <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-4/5 h-1 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
-          </figure>
+          <div className="relative group">
+            <figure className="relative m-0 w-full max-w-[180px] sm:max-w-[220px] md:max-w-[300px] animate-fadeIn">
+              <img
+                src={imgHero}
+                alt="Hairon Chávez"
+                className="w-full h-auto rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 object-cover"
+              />
+              <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-4/5 h-1 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+            </figure>
+
+            {/* Marco animado */}
+            <div className="absolute inset-0 rounded-xl border-2 border-primary/0 group-hover:border-primary/100 transition-all duration-500 scale-105 group-hover:scale-100"></div>
+          </div>
         </div>
       </div>
     </div>
