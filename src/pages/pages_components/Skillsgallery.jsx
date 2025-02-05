@@ -1,208 +1,9 @@
-import { useState } from "react";
-import styled from "styled-components";
-import { colors, fonts } from "../../assets/styles";
-import Headercontent from "../../components/Headercontent";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import imgRegistrarVenta from "../../assets/imgs/registrarVenta.png";
 import imgFinalizarVenta from "../../assets/imgs/finalizarVenta.png";
 import imgDesarrolloWeb from "../../assets/imgs/pageone.png";
 import imgAppgym from "../../assets/imgs/appgym.png";
-
-const SkillsgalleryWrapper = styled.section`
-  width: 100%;
-  min-height: 100vh;
-  background-color: ${colors.bgDark};
-  padding: 3rem 4rem;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-
-  @media (max-width: 768px) {
-    padding: 2rem 1.5rem;
-  }
-`;
-
-const GalleryContainer = styled.div`
-  max-width: 1400px;
-  margin: 2rem auto 0;
-  width: 100%;
-
-  @media (max-width: 768px) {
-    margin: 1rem auto 0;
-  }
-`;
-
-const TabsContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-  }
-`;
-
-const TabButton = styled.button`
-  background: transparent;
-  border: none;
-  color: ${(props) => (props.active ? colors.primary : colors.title)};
-  font-family: ${fonts.title};
-  font-size: 1.1rem;
-  padding: 0.5rem 1.5rem;
-  cursor: pointer;
-  position: relative;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-
-  @media (max-width: 768px) {
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    width: 100%;
-    max-width: 280px;
-  }
-
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: ${(props) => (props.active ? "100%" : "0")};
-    height: 2px;
-    background: ${colors.primary};
-    transition: width 0.3s ease;
-  }
-
-  &:hover {
-    color: ${colors.primary};
-    &::after {
-      width: 100%;
-    }
-  }
-`;
-
-const GalleryGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(2, 300px);
-  gap: 1.5rem;
-  opacity: ${(props) => (props.visible ? 1 : 0)};
-  transform: translateY(${(props) => (props.visible ? "0" : "20px")});
-  transition: all 0.5s ease;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    gap: 1rem;
-  }
-`;
-
-const GalleryItem = styled.div`
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  cursor: ${(props) => (props.link ? "pointer" : "default")};
-  grid-column: ${(props) => props.span};
-  grid-row: ${(props) => props.rowSpan};
-
-  @media (max-width: 768px) {
-    grid-column: 1 / -1;
-    grid-row: auto;
-    height: 250px;
-  }
-
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgba(0, 0, 0, 0.7) 100%
-    );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 1;
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease;
-  }
-
-  .overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 1.5rem;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: all 0.3s ease;
-    z-index: 2;
-
-    @media (max-width: 768px) {
-      padding: 1rem;
-      opacity: 1;
-      transform: none;
-      background: linear-gradient(
-        to bottom,
-        transparent 0%,
-        rgba(0, 0, 0, 0.8) 100%
-      );
-    }
-  }
-
-  .title {
-    color: white;
-    font-family: ${fonts.title};
-    font-size: 1.5rem;
-    margin: 0 0 0.5rem;
-
-    @media (max-width: 768px) {
-      font-size: 1.2rem;
-      margin: 0 0 0.25rem;
-    }
-  }
-
-  .description {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.9rem;
-    margin: 0;
-
-    @media (max-width: 768px) {
-      font-size: 0.8rem;
-    }
-  }
-
-  &:hover {
-    &::before {
-      opacity: 1;
-    }
-
-    img {
-      transform: scale(1.1);
-    }
-
-    .overlay {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @media (max-width: 768px) {
-    &:hover {
-      img {
-        transform: none;
-      }
-    }
-  }
-`;
 
 const galleryData = {
   desarrolloweb: [
@@ -211,32 +12,28 @@ const galleryData = {
       title: "Proyecto a nivel nacional",
       description: "Desarrollo full-stack con Java y PrimeFaces",
       image: imgFinalizarVenta,
-      span: "1 / 7",
-      rowSpan: "1 / 3",
+      span: "col-span-6 row-span-2",
     },
     {
       id: 2,
       title: "sitio web corporativo",
       description: "Interface de administración con gráficos en tiempo real",
       image: imgDesarrolloWeb,
-      span: "7 / 13",
-      rowSpan: "1 / 2",
+      span: "col-span-6 row-span-1",
     },
     {
       id: 3,
       title: "Desarrollo a nivel de adunas",
       description: "Diseño responsivo para aduanas del país",
       image: imgRegistrarVenta,
-      span: "7 / 10",
-      rowSpan: "2 / 3",
+      span: "col-span-3 row-span-1",
     },
     {
       id: 4,
       title: "Desarrollo visual",
       description: "Desarrollo de interfaz visual para empresas",
       image: "https://images.unsplash.com/photo-1678025275990-fc029162ec5d",
-      span: "10 / 13",
-      rowSpan: "2 / 3",
+      span: "col-span-3 row-span-1",
     },
   ],
   disenouxui: [
@@ -245,25 +42,22 @@ const galleryData = {
       title: "Diseño UX/UI para App Móvil",
       description: "Interfaz intuitiva para aplicación de delivery",
       image: imgFinalizarVenta,
-      span: "1 / 7",
-      rowSpan: "1 / 3",
+      span: "col-span-6 row-span-2",
     },
     {
       id: 2,
       title: "Rediseño de Plataforma Web",
       description: "Mejora de experiencia de usuario para e-commerce",
       image: imgDesarrolloWeb,
-      span: "7 / 13",
-      rowSpan: "1 / 2",
+      span: "col-span-6 row-span-1",
     },
     {
       id: 3,
       title: "Sitio Web Fitness",
       description:
         "Un sitio web que realicé con el fin de poder crear una comunidad fitnes",
-      image: imgAppgym, // Puedes cambiar esta imagen por una específica
-      span: "7 / 13",
-      rowSpan: "2 / 3",
+      image: imgAppgym,
+      span: "col-span-6 row-span-1",
       link: "https://mygymstats.netlify.app",
     },
   ],
@@ -273,31 +67,80 @@ const galleryData = {
       title: "Sistema de Gestión",
       description: "Software de gestión empresarial multiplataforma",
       image: imgRegistrarVenta,
-      span: "1 / 7",
-      rowSpan: "1 / 3",
+      span: "col-span-6 row-span-2",
     },
     {
       id: 2,
       title: "App de Control de Inventario",
       description: "Aplicación de escritorio para control de stock",
       image: imgDesarrolloWeb,
-      span: "7 / 13",
-      rowSpan: "1 / 2",
+      span: "col-span-6 row-span-2",
     },
   ],
 };
 
-function Skillsgallery() {
-  const [activeTab, setActiveTab] = useState("desarrolloweb");
-  const [isVisible, setIsVisible] = useState(true);
+const TabButton = ({ active, children, onClick }) => (
+  <motion.button
+    onClick={onClick}
+    className={`relative px-6 py-2 text-lg font-title transition-colors
+      ${active ? "text-primary" : "text-title hover:text-primary"}`}
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+  >
+    {children}
+    <motion.div
+      className="absolute bottom-0 left-0 h-0.5 bg-primary"
+      initial={false}
+      animate={{ width: active ? "100%" : "0%" }}
+      transition={{ duration: 0.3 }}
+    />
+  </motion.button>
+);
 
-  const handleTabChange = (tab) => {
-    if (tab === activeTab) return;
-    setIsVisible(false);
-    setTimeout(() => {
-      setActiveTab(tab);
-      setIsVisible(true);
-    }, 500);
+const GalleryItem = ({ item, onClick }) => {
+  return (
+    <motion.div
+      layoutId={`gallery-item-${item.id}`}
+      className={`relative rounded-xl overflow-hidden cursor-pointer group ${item.span}`}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      whileHover={{ scale: 1.02 }}
+      transition={{ duration: 0.3 }}
+      onClick={() => onClick(item.link)}
+    >
+      <motion.img
+        src={item.image}
+        alt={item.title}
+        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+      />
+
+      {/* Overlay gradiente */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+      {/* Contenedor del texto */}
+      <div className="absolute inset-0 flex flex-col justify-center items-center p-6 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
+        <h3 className="text-2xl font-title text-center mb-2">{item.title}</h3>
+        <p className="text-sm text-white/90 text-center max-w-md">
+          {item.description}
+        </p>
+      </div>
+    </motion.div>
+  );
+};
+
+function SkillsGallery() {
+  const [activeTab, setActiveTab] = useState("desarrolloweb");
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  const handleTabChange = async (tab) => {
+    if (tab === activeTab || isAnimating) return;
+
+    setIsAnimating(true);
+    setActiveTab(tab);
+
+    // Reset animating state after animation completes
+    setTimeout(() => setIsAnimating(false), 500);
   };
 
   const handleItemClick = (link) => {
@@ -313,14 +156,43 @@ function Skillsgallery() {
   ];
 
   return (
-    <SkillsgalleryWrapper>
-      <Headercontent
-        title="PROYECTOS"
-        subtitle="PORTAFOLIO"
-        description="Explora mi colección de proyectos en desarrollo web, diseño UX/UI y aplicaciones de escritorio. Cada proyecto refleja mi compromiso con la calidad y la innovación."
-      />
-      <GalleryContainer>
-        <TabsContainer>
+    <section className="w-full min-h-screen bg-bgDark py-12 px-4 md:px-16">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="max-w-7xl mx-auto"
+      >
+        <div className="text-center mb-12">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-primary text-sm uppercase tracking-wider mb-2"
+          >
+            PROYECTOS
+          </motion.h2>
+          <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-title text-4xl font-bold mb-4"
+          >
+            PORTAFOLIO
+          </motion.h3>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-content max-w-3xl mx-auto"
+          >
+            Explora mi colección de proyectos en desarrollo web, diseño UX/UI y
+            aplicaciones de escritorio. Cada proyecto refleja mi compromiso con
+            la calidad y la innovación.
+          </motion.p>
+        </div>
+
+        <div className="flex justify-center gap-4 mb-8 flex-wrap">
           {tabs.map((tab) => (
             <TabButton
               key={tab.id}
@@ -330,27 +202,25 @@ function Skillsgallery() {
               {tab.label}
             </TabButton>
           ))}
-        </TabsContainer>
-        <GalleryGrid visible={isVisible}>
-          {galleryData[activeTab]?.map((item) => (
-            <GalleryItem
-              key={item.id}
-              span={item.span}
-              rowSpan={item.rowSpan}
-              link={item.link}
-              onClick={() => handleItemClick(item.link)}
-            >
-              <img src={item.image} alt={item.title} />
-              <div className="overlay">
-                <h3 className="title">{item.title}</h3>
-                <p className="description">{item.description}</p>
-              </div>
-            </GalleryItem>
-          ))}
-        </GalleryGrid>
-      </GalleryContainer>
-    </SkillsgalleryWrapper>
+        </div>
+
+        <motion.div
+          className="grid grid-cols-12 auto-rows-[300px] gap-6 tm:auto-rows-[350px]"
+          layout
+        >
+          <AnimatePresence mode="wait">
+            {galleryData[activeTab]?.map((item) => (
+              <GalleryItem
+                key={item.id}
+                item={item}
+                onClick={handleItemClick}
+              />
+            ))}
+          </AnimatePresence>
+        </motion.div>
+      </motion.div>
+    </section>
   );
 }
 
-export default Skillsgallery;
+export default SkillsGallery;

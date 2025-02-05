@@ -1,6 +1,6 @@
 import React from "react";
 import { Layers, Server, Database } from "lucide-react";
-import Headercontent from "../../components/Headercontent";
+import { motion } from "framer-motion";
 
 const skillsData = [
   {
@@ -35,20 +35,78 @@ const skillsData = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+    },
+  },
+};
+
+const headerVariants = {
+  hidden: {
+    opacity: 0,
+    y: 30,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 50,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+};
+
 function SkillCard({ skill }) {
   const Icon = skill.Icon;
 
   return (
-    <div className="bg-bgDark rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-2.5 hover:shadow-2xl min-h-[420px] relative flex flex-col group">
+    <motion.div
+      variants={cardVariants}
+      className="bg-bgDark rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-2.5 hover:shadow-2xl min-h-[420px] relative flex flex-col group"
+      whileHover={{
+        y: -10,
+        transition: { duration: 0.3 },
+      }}
+    >
       {/* Gradient border top */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-primary/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <motion.div
+        className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-primary/50"
+        initial={{ opacity: 0 }}
+        whileHover={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
+      />
 
       {/* Card Header */}
       <div className="p-6 bg-bgDark relative z-10">
         {/* Icon Container */}
-        <div className="w-16 h-16 mx-auto mb-4 flex justify-center items-center bg-primary/10 rounded-full transition-all duration-300 group-hover:scale-110 group-hover:bg-primary/20">
-          <Icon className="w-8 h-8 text-primary stroke-[1.5px] transition-transform duration-300 group-hover:scale-110" />
-        </div>
+        <motion.div
+          className="w-16 h-16 mx-auto mb-4 flex justify-center items-center bg-primary/10 rounded-full"
+          whileHover={{
+            scale: 1.1,
+            backgroundColor: "rgba(144, 124, 102, 0.2)",
+          }}
+        >
+          <Icon className="w-8 h-8 text-primary stroke-[1.5px]" />
+        </motion.div>
 
         {/* Title Section */}
         <p className="text-primary text-sm uppercase tracking-wider mb-1 text-center">
@@ -61,12 +119,17 @@ function SkillCard({ skill }) {
         {/* Tags */}
         <div className="flex flex-wrap gap-2 justify-center mt-3">
           {skill.tags.map((tag, index) => (
-            <span
+            <motion.span
               key={index}
-              className="bg-white/10 text-title px-3 py-1 rounded-full text-sm transition-all duration-300 hover:bg-primary/20 hover:-translate-y-0.5"
+              className="bg-white/10 text-title px-3 py-1 rounded-full text-sm"
+              whileHover={{
+                y: -2,
+                backgroundColor: "rgba(144, 124, 102, 0.2)",
+                transition: { duration: 0.2 },
+              }}
             >
               {tag}
-            </span>
+            </motion.span>
           ))}
         </div>
       </div>
@@ -75,26 +138,52 @@ function SkillCard({ skill }) {
       <div className="p-6 text-center flex-1 flex flex-col justify-between">
         {/* Stats */}
         <div className="flex justify-around mb-4">
-          <div className="stat">
+          <motion.div
+            className="stat"
+            initial={{ scale: 0.5, opacity: 0 }}
+            whileInView={{
+              scale: 1,
+              opacity: 1,
+              transition: { duration: 0.5, delay: 0.2 },
+            }}
+            viewport={{ once: true }}
+          >
             <p className="text-primary text-4xl font-bold m-0 leading-none">
               {skill.years}+
             </p>
             <p className="text-title text-sm mt-2">Años</p>
-          </div>
-          <div className="stat">
+          </motion.div>
+          <motion.div
+            className="stat"
+            initial={{ scale: 0.5, opacity: 0 }}
+            whileInView={{
+              scale: 1,
+              opacity: 1,
+              transition: { duration: 0.5, delay: 0.3 },
+            }}
+            viewport={{ once: true }}
+          >
             <p className="text-primary text-4xl font-bold m-0 leading-none">
               {skill.projects}
             </p>
             <p className="text-title text-sm mt-2">Proyectos</p>
-          </div>
+          </motion.div>
         </div>
 
         {/* Description */}
-        <p className="text-content text-base leading-relaxed m-0">
+        <motion.p
+          className="text-content text-base leading-relaxed m-0"
+          initial={{ opacity: 0 }}
+          whileInView={{
+            opacity: 1,
+            transition: { duration: 0.5, delay: 0.4 },
+          }}
+          viewport={{ once: true }}
+        >
           {skill.description}
-        </p>
+        </motion.p>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -109,16 +198,31 @@ function Skills() {
       id="skills"
       className="w-full bg-bgLight flex flex-col justify-center py-8 px-4 md:px-12 box-border -mt-1"
     >
-      <Headercontent
-        title={title}
-        subtitle={subtitle}
-        description={description}
-      />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1400px] mx-auto mt-8 md:mt-6 w-full">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={headerVariants}
+        className="text-center max-w-3xl mx-auto mb-12"
+      >
+        <h2 className="text-primary uppercase tracking-wider text-sm mb-2">
+          {title}
+        </h2>
+        <h3 className="text-title text-4xl font-bold mb-4">{subtitle}</h3>
+        <p className="text-content leading-relaxed">{description}</p>
+      </motion.div>
+
+      <motion.div
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1400px] mx-auto mt-8 md:mt-6 w-full"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
         {skillsData.map((skill, i) => (
           <SkillCard skill={skill} key={i} />
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }
