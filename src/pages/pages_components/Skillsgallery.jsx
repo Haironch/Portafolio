@@ -23,7 +23,7 @@ const galleryData = {
     },
     {
       id: 3,
-      title: "Desarrollo a nivel de adunas",
+      title: "Desarrollo a nivel de aduanas",
       description: "Diseño responsivo para aduanas del país",
       image: imgRegistrarVenta,
       span: "col-span-3 row-span-1",
