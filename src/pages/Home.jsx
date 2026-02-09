@@ -1,6 +1,7 @@
 import React from "react";
 import Bodyhero from "./pages_components/Bodyhero";
 import Navbar from "../components/Navbar";
+import AboutTimeline from "./pages_components/AboutTimeline";
 import Skills from "./pages_components/Skills";
 import Skillsgallery from "./pages_components/Skillsgallery";
 import Articles from "./pages_components/Articles";
@@ -14,6 +15,10 @@ const Home = () => {
       <main className="relative w-full">
         <section id="bodyhero">
           <Bodyhero />
+        </section>
+
+        <section id="about" className="scroll-mt-[77px]">
+          <AboutTimeline />
         </section>
 
         <section id="skills" className="scroll-mt-[77px]">

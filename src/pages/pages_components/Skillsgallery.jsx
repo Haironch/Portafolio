@@ -4,6 +4,7 @@ import imgRegistrarVenta from "../../assets/imgs/registrarVenta.png";
 import imgFinalizarVenta from "../../assets/imgs/finalizarVenta.png";
 import imgDesarrolloWeb from "../../assets/imgs/pageone.png";
 import imgAppgym from "../../assets/imgs/appgym.png";
+import imgCanella from "../../assets/imgs/canellaLogo.jpeg";
 
 const galleryData = {
   desarrolloweb: [
@@ -12,28 +13,28 @@ const galleryData = {
       title: "Proyecto a nivel nacional",
       description: "Desarrollo full-stack con Java y PrimeFaces",
       image: imgFinalizarVenta,
-      span: "col-span-6 row-span-2",
+      span: "col-span-12 tm:col-span-6 tm:row-span-2",
     },
     {
       id: 2,
       title: "sitio web corporativo",
       description: "Interface de administración con gráficos en tiempo real",
       image: imgDesarrolloWeb,
-      span: "col-span-6 row-span-1",
+      span: "col-span-12 tm:col-span-6 tm:row-span-1",
     },
     {
       id: 3,
-      title: "Desarrollo a nivel de aduanas",
-      description: "Diseño responsivo para aduanas del país",
-      image: imgRegistrarVenta,
-      span: "col-span-3 row-span-1",
+      title: "Analista Desarrollador | Canella",
+      description: "Migración de plataformas bancarias.",
+      image: imgCanella,
+      span: "col-span-6 tm:col-span-3 tm:row-span-1",
     },
     {
       id: 4,
       title: "Desarrollo visual",
       description: "Desarrollo de interfaz visual para empresas",
       image: "https://images.unsplash.com/photo-1678025275990-fc029162ec5d",
-      span: "col-span-3 row-span-1",
+      span: "col-span-6 tm:col-span-3 tm:row-span-1",
     },
   ],
   disenouxui: [
@@ -42,14 +43,14 @@ const galleryData = {
       title: "Diseño UX/UI para App Móvil",
       description: "Interfaz intuitiva para aplicación de delivery",
       image: imgFinalizarVenta,
-      span: "col-span-6 row-span-2",
+      span: "col-span-12 tm:col-span-6 tm:row-span-2",
     },
     {
       id: 2,
       title: "Rediseño de Plataforma Web",
       description: "Mejora de experiencia de usuario para e-commerce",
       image: imgDesarrolloWeb,
-      span: "col-span-6 row-span-1",
+      span: "col-span-12 tm:col-span-6 tm:row-span-1",
     },
     {
       id: 3,
@@ -57,7 +58,7 @@ const galleryData = {
       description:
         "Un sitio web que realicé con el fin de poder crear una comunidad fitnes",
       image: imgAppgym,
-      span: "col-span-6 row-span-1",
+      span: "col-span-12 tm:col-span-6 tm:row-span-1",
       link: "https://mygymstats.netlify.app",
     },
   ],
@@ -67,14 +68,14 @@ const galleryData = {
       title: "Sistema de Gestión",
       description: "Software de gestión empresarial multiplataforma",
       image: imgRegistrarVenta,
-      span: "col-span-6 row-span-2",
+      span: "col-span-12 tm:col-span-6 tm:row-span-2",
     },
     {
       id: 2,
       title: "App de Control de Inventario",
       description: "Aplicación de escritorio para control de stock",
       image: imgDesarrolloWeb,
-      span: "col-span-6 row-span-2",
+      span: "col-span-12 tm:col-span-6 tm:row-span-2",
     },
   ],
 };
@@ -82,7 +83,7 @@ const galleryData = {
 const TabButton = ({ active, children, onClick }) => (
   <motion.button
     onClick={onClick}
-    className={`relative px-6 py-2 text-lg font-title transition-colors
+    className={`relative px-3 mm:px-4 sm:px-6 py-2 text-sm mm:text-base sm:text-lg font-title transition-colors
       ${active ? "text-primary" : "text-title hover:text-primary"}`}
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
@@ -119,9 +120,9 @@ const GalleryItem = ({ item, onClick }) => {
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
       {/* Contenedor del texto */}
-      <div className="absolute inset-0 flex flex-col justify-center items-center p-6 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-        <h3 className="text-2xl font-title text-center mb-2">{item.title}</h3>
-        <p className="text-sm text-white/90 text-center max-w-md">
+      <div className="absolute inset-0 flex flex-col justify-center items-center p-3 sm:p-6 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
+        <h3 className="text-base sm:text-2xl font-title text-center mb-1 sm:mb-2">{item.title}</h3>
+        <p className="text-xs sm:text-sm text-white/90 text-center max-w-md">
           {item.description}
         </p>
       </div>
@@ -156,7 +157,7 @@ function SkillsGallery() {
   ];
 
   return (
-    <section className="w-full min-h-screen bg-bgDark py-12 px-4 md:px-16">
+    <section className="w-full min-h-screen bg-bgDark py-12 px-3 sm:px-4 md:px-16">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -176,7 +177,7 @@ function SkillsGallery() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-title text-4xl font-bold mb-4"
+            className="text-title text-2xl sm:text-4xl font-bold mb-4"
           >
             PORTAFOLIO
           </motion.h3>
@@ -205,7 +206,7 @@ function SkillsGallery() {
         </div>
 
         <motion.div
-          className="grid grid-cols-12 auto-rows-[300px] gap-6 tm:auto-rows-[350px]"
+          className="grid grid-cols-12 auto-rows-[220px] mm:auto-rows-[250px] sm:auto-rows-[300px] gap-3 sm:gap-6 tm:auto-rows-[350px]"
           layout
         >
           <AnimatePresence mode="wait">

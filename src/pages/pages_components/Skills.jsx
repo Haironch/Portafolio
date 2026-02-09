@@ -196,7 +196,7 @@ function Skills() {
   return (
     <section
       id="skills"
-      className="w-full bg-bgLight flex flex-col justify-center py-8 px-4 md:px-12 box-border -mt-1"
+      className="w-full bg-bgLight flex flex-col justify-center py-8 px-3 sm:px-4 md:px-12 box-border -mt-1"
     >
       <motion.div
         initial="hidden"
@@ -208,8 +208,8 @@ function Skills() {
         <h2 className="text-primary uppercase tracking-wider text-sm mb-2">
           {title}
         </h2>
-        <h3 className="text-title text-4xl font-bold mb-4">{subtitle}</h3>
-        <p className="text-content leading-relaxed">{description}</p>
+        <h3 className="text-title text-2xl sm:text-4xl font-bold mb-4">{subtitle}</h3>
+        <p className="text-content text-sm sm:text-base leading-relaxed">{description}</p>
       </motion.div>
 
       <motion.div
