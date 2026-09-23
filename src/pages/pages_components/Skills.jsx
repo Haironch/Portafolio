@@ -7,7 +7,7 @@ const skillsData = [
     type: "Frontend",
     title: "Desarrollo Web",
     Icon: Layers,
-    years: 4,
+    years: 6,
     projects: 15,
     tags: ["React", "HTML5", "CSS3", "JavaScript"],
     description:
@@ -17,7 +17,7 @@ const skillsData = [
     type: "Backend",
     title: "Desarrollo Backend",
     Icon: Server,
-    years: 4,
+    years: 6,
     projects: 12,
     tags: ["Node.js", "Java", "Express", "Spring Boot"],
     description:
@@ -27,7 +27,7 @@ const skillsData = [
     type: "Bases de Datos",
     title: "Gestión de Datos",
     Icon: Database,
-    years: 4,
+    years: 6,
     projects: 10,
     tags: ["MySQL", "MongoDB", "PostgreSQL", "Redis"],
     description:
@@ -191,7 +191,7 @@ function Skills() {
   const title = "Experiencia Profesional";
   const subtitle = "Mis Habilidades";
   const description =
-    "Desarrollador Full Stack con 4 años de experiencia y pensum académico cerrado. Especializado en tecnologías web modernas, desarrollo backend robusto y gestión eficiente de bases de datos. Con experiencia en la creación de soluciones a nivel nacional trabajando para empresas como la Superintendencia de Administración Tributaria, específicamente en el departamento de Aduanas.";
+    "Desarrollador Full Stack con 6 años de experiencia y pensum académico cerrado. Especializado en tecnologías web modernas, desarrollo backend robusto y gestión eficiente de bases de datos. Con experiencia en la creación de soluciones a nivel nacional trabajando para empresas como la Superintendencia de Administración Tributaria, específicamente en el departamento de Aduanas.";
 
   return (
     <section

@@ -1,13 +1,77 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ExternalLink } from "lucide-react";
 import imgRegistrarVenta from "../../assets/imgs/registrarVenta.png";
 import imgFinalizarVenta from "../../assets/imgs/finalizarVenta.png";
 import imgDesarrolloWeb from "../../assets/imgs/pageone.png";
 import imgAppgym from "../../assets/imgs/appgym.png";
 import imgCanella from "../../assets/imgs/canellaLogo.jpeg";
+import imgTerreMentor from "../../assets/imgs/terre-mentor.jpg";
+import imgDescubreXela from "../../assets/imgs/descubre-xela.jpg";
+import imgJuridia from "../../assets/imgs/juridia-eta.jpg";
+import imgZionIT from "../../assets/imgs/zion-it.jpg";
 
 const galleryData = {
   desarrolloweb: [
+    {
+      id: 1,
+      title: "Zion IT",
+      description: "Mi empresa de desarrollo de software, de la cual soy dueño y promotor",
+      image: imgZionIT,
+      span: "col-span-12 tm:col-span-6 tm:row-span-2",
+      link: "https://zion-it.vercel.app",
+    },
+    {
+      id: 2,
+      title: "TerreMentor",
+      description: "App de monitoreo de terremotos y sismos en tiempo real",
+      image: imgTerreMentor,
+      span: "col-span-12 tm:col-span-6 tm:row-span-1",
+      link: "https://terre-mentor.vercel.app",
+    },
+    {
+      id: 3,
+      title: "Juridia",
+      description: "App para aprender de leyes",
+      image: imgJuridia,
+      span: "col-span-6 tm:col-span-3 tm:row-span-1",
+      link: "https://juridia-eta.vercel.app",
+    },
+    {
+      id: 4,
+      title: "sitio web corporativo",
+      description: "Interface de administración con gráficos en tiempo real",
+      image: imgDesarrolloWeb,
+      span: "col-span-6 tm:col-span-3 tm:row-span-1",
+    },
+  ],
+  disenouxui: [
+    {
+      id: 1,
+      title: "Descubre Xela",
+      description: "Sitio para descubrir Quetzaltenango, la ciudad donde vivo",
+      image: imgDescubreXela,
+      span: "col-span-12 tm:col-span-6 tm:row-span-2",
+      link: "https://descubre-xela.vercel.app",
+    },
+    {
+      id: 2,
+      title: "Sitio Web Fitness",
+      description:
+        "Un sitio web que realicé con el fin de poder crear una comunidad fitnes",
+      image: imgAppgym,
+      span: "col-span-12 tm:col-span-6 tm:row-span-1",
+      link: "https://mygymstats.netlify.app",
+    },
+    {
+      id: 3,
+      title: "Desarrollo visual",
+      description: "Desarrollo de interfaz visual para empresas",
+      image: "https://images.unsplash.com/photo-1678025275990-fc029162ec5d",
+      span: "col-span-12 tm:col-span-6 tm:row-span-1",
+    },
+  ],
+  sistemasempresariales: [
     {
       id: 1,
       title: "Proyecto a nivel nacional",
@@ -17,9 +81,9 @@ const galleryData = {
     },
     {
       id: 2,
-      title: "sitio web corporativo",
-      description: "Interface de administración con gráficos en tiempo real",
-      image: imgDesarrolloWeb,
+      title: "Registro de ventas | SAT",
+      description: "Módulo de registro de ventas para la Agencia Virtual de la SAT",
+      image: imgRegistrarVenta,
       span: "col-span-12 tm:col-span-6 tm:row-span-1",
     },
     {
@@ -27,55 +91,7 @@ const galleryData = {
       title: "Analista Desarrollador | Canella",
       description: "Migración de plataformas bancarias.",
       image: imgCanella,
-      span: "col-span-6 tm:col-span-3 tm:row-span-1",
-    },
-    {
-      id: 4,
-      title: "Desarrollo visual",
-      description: "Desarrollo de interfaz visual para empresas",
-      image: "https://images.unsplash.com/photo-1678025275990-fc029162ec5d",
-      span: "col-span-6 tm:col-span-3 tm:row-span-1",
-    },
-  ],
-  disenouxui: [
-    {
-      id: 1,
-      title: "Diseño UX/UI para App Móvil",
-      description: "Interfaz intuitiva para aplicación de delivery",
-      image: imgFinalizarVenta,
-      span: "col-span-12 tm:col-span-6 tm:row-span-2",
-    },
-    {
-      id: 2,
-      title: "Rediseño de Plataforma Web",
-      description: "Mejora de experiencia de usuario para e-commerce",
-      image: imgDesarrolloWeb,
       span: "col-span-12 tm:col-span-6 tm:row-span-1",
-    },
-    {
-      id: 3,
-      title: "Sitio Web Fitness",
-      description:
-        "Un sitio web que realicé con el fin de poder crear una comunidad fitnes",
-      image: imgAppgym,
-      span: "col-span-12 tm:col-span-6 tm:row-span-1",
-      link: "https://mygymstats.netlify.app",
-    },
-  ],
-  aplicacionesdeescritorio: [
-    {
-      id: 1,
-      title: "Sistema de Gestión",
-      description: "Software de gestión empresarial multiplataforma",
-      image: imgRegistrarVenta,
-      span: "col-span-12 tm:col-span-6 tm:row-span-2",
-    },
-    {
-      id: 2,
-      title: "App de Control de Inventario",
-      description: "Aplicación de escritorio para control de stock",
-      image: imgDesarrolloWeb,
-      span: "col-span-12 tm:col-span-6 tm:row-span-2",
     },
   ],
 };
@@ -83,7 +99,7 @@ const galleryData = {
 const TabButton = ({ active, children, onClick }) => (
   <motion.button
     onClick={onClick}
-    className={`relative px-3 mm:px-4 sm:px-6 py-2 text-sm mm:text-base sm:text-lg font-title transition-colors
+    className={`relative px-2 sm:px-6 py-2 text-sm sm:text-lg font-title transition-colors
       ${active ? "text-primary" : "text-title hover:text-primary"}`}
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
@@ -116,13 +132,16 @@ const GalleryItem = ({ item, onClick }) => {
         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
       />
 
-      {/* Overlay gradiente */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      {/* Overlay gradiente (siempre visible en móvil, en hover desde sm) */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 sm:via-black/50 to-transparent opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300" />
 
       {/* Contenedor del texto */}
-      <div className="absolute inset-0 flex flex-col justify-center items-center p-3 sm:p-6 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-        <h3 className="text-base sm:text-2xl font-title text-center mb-1 sm:mb-2">{item.title}</h3>
-        <p className="text-xs sm:text-sm text-white/90 text-center max-w-md">
+      <div className="absolute inset-0 flex flex-col justify-end sm:justify-center items-center p-3 sm:p-6 text-white opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 transform translate-y-0 sm:translate-y-4 sm:group-hover:translate-y-0">
+        <h3 className="text-base sm:text-2xl font-title text-center mb-1 sm:mb-2 inline-flex items-center gap-1.5">
+          {item.title}
+          {item.link && <ExternalLink size={14} className="text-primary shrink-0" />}
+        </h3>
+        <p className="hidden sm:block text-xs sm:text-sm text-white/90 text-center max-w-md">
           {item.description}
         </p>
       </div>
@@ -153,7 +172,7 @@ function SkillsGallery() {
   const tabs = [
     { id: "desarrolloweb", label: "Desarrollo Web" },
     { id: "disenouxui", label: "Diseño UX/UI" },
-    { id: "aplicacionesdeescritorio", label: "Apps de Escritorio" },
+    { id: "sistemasempresariales", label: "Sistemas Empresariales", short: "Empresarial" },
   ];
 
   return (
@@ -188,19 +207,26 @@ function SkillsGallery() {
             className="text-content max-w-3xl mx-auto"
           >
             Explora mi colección de proyectos en desarrollo web, diseño UX/UI y
-            aplicaciones de escritorio. Cada proyecto refleja mi compromiso con
+            sistemas empresariales. Cada proyecto refleja mi compromiso con
             la calidad y la innovación.
           </motion.p>
         </div>
 
-        <div className="flex justify-center gap-4 mb-8 flex-wrap">
+        <div className="flex justify-center gap-1 sm:gap-4 mb-8 flex-wrap">
           {tabs.map((tab) => (
             <TabButton
               key={tab.id}
               active={activeTab === tab.id}
               onClick={() => handleTabChange(tab.id)}
             >
-              {tab.label}
+              {tab.short ? (
+                <>
+                  <span className="sm:hidden">{tab.short}</span>
+                  <span className="hidden sm:inline">{tab.label}</span>
+                </>
+              ) : (
+                tab.label
+              )}
             </TabButton>
           ))}
         </div>

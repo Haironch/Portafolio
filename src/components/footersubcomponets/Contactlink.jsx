@@ -6,6 +6,7 @@ const Contactbuttons = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 8px;
   border: 1px solid blanchedalmond;
   height: 32px;
   width: 200px;

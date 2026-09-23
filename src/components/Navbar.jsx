@@ -85,7 +85,7 @@ const Navbar = () => {
       {/* Overlay móvil */}
       {isMenuOpen && (
         <div
-          className="md:hidden fixed inset-0 bg-bgDark/98 z-40"
+          className="md:hidden fixed inset-0 bg-bgDark/[0.98] z-40"
           onClick={() => setIsMenuOpen(false)}
         />
       )}

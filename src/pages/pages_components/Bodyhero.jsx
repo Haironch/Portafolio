@@ -78,7 +78,7 @@ const Bodyhero = () => {
                 className="inline-block"
               >
                 Hairon
-              </motion.span>
+              </motion.span>{" "}
               <br className="hidden xs:block" />
               <motion.span
                 variants={{
@@ -115,7 +115,7 @@ const Bodyhero = () => {
               variants={slideUp}
               className="text-sm mm:text-base sm:text-lg md:text-2xl text-primary font-semibold text-center md:text-left px-1 sm:px-0"
             >
-              Desarrollador Full Stack y CEO de Tav Solutions Technology
+              Desarrollador Full Stack y CEO de Zion IT
             </motion.span>
 
             <motion.div

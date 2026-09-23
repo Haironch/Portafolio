@@ -23,6 +23,20 @@ const Content = styled.div`
       font-size: 1.3em;
     }
   }
+
+  @media (max-width: 575px) {
+    margin-bottom: 40px;
+    .title {
+      font-size: 2.25em;
+    }
+    .subtitle {
+      font-size: 1.5em;
+    }
+    .description {
+      width: 92%;
+      font-size: 1.05em;
+    }
+  }
 `;
 
 function Headercontent({ title, subtitle, description }) {
